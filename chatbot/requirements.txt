@@ -1,0 +1,7 @@
+# Dùng Python 3.10 (Rasa 3.6 không hỗ trợ Python 3.11 trở lên)
+rasa==3.6.20
+rasa-sdk==3.6.2
+requests>=2.31
+python-dotenv>=1.0
+# setuptools 81+ đã bỏ pkg_resources mà Rasa 3.6 cần
+setuptools<81

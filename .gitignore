@@ -1,0 +1,14 @@
+node_modules
+dist
+.env
+.expo
+.venv
+models
+.rasa
+__pycache__
+*.log
+
+# Không đưa lên GitHub
+_backup_truoc_v5/
+_nop/
+.DS_Store

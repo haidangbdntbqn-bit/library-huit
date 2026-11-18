@@ -1,0 +1,32 @@
+version: "3.1"
+
+stories:
+  - story: Chào rồi tìm sách
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_book
+        entities:
+          - book_title: cơ sở dữ liệu
+      - action: action_search_book
+      - intent: thank
+      - action: utter_thank
+
+  - story: Tìm phòng rồi hỏi phòng đã đặt
+    steps:
+      - intent: ask_room
+        entities:
+          - people: "5"
+          - time_of_day: chiều nay
+      - action: action_find_room
+      - intent: ask_my_bookings
+      - action: action_my_bookings
+
+  - story: Hỏi hạn trả rồi hỏi gia hạn
+    steps:
+      - intent: ask_my_loans
+      - action: action_my_loans
+      - intent: ask_renew
+      - action: action_loan_rules
+      - intent: goodbye
+      - action: utter_goodbye

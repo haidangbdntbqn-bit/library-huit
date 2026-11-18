@@ -1,0 +1,19 @@
+# Chạy SQL Server 2022 bằng Docker (không bắt buộc - dùng khi máy chưa cài SQL Server)
+# Lệnh: docker compose up -d
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    # Máy Mac chip Apple (M1/M2/M3...) chạy image này qua Rosetta; máy Windows/Intel không bị ảnh hưởng
+    platform: linux/amd64
+    container_name: library-huit-sql
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "YourStrong@Passw0rd"
+      MSSQL_PID: "Developer"
+      TZ: "Asia/Ho_Chi_Minh"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqldata:/var/opt/mssql
+volumes:
+  sqldata:

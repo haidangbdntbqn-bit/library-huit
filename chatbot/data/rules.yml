@@ -1,0 +1,92 @@
+version: "3.1"
+
+rules:
+  - rule: Chào
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - rule: Tạm biệt
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Cảm ơn
+    steps:
+      - intent: thank
+      - action: utter_thank
+
+  - rule: Hỏi bot là ai
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
+
+  - rule: Tìm sách
+    steps:
+      - intent: ask_book
+      - action: action_search_book
+
+  - rule: Sách theo ngành
+    steps:
+      - intent: ask_book_by_major
+      - action: action_recommend_books
+
+  - rule: Tìm phòng
+    steps:
+      - intent: ask_room
+      - action: action_find_room
+
+  - rule: Sách đang mượn
+    steps:
+      - intent: ask_my_loans
+      - action: action_my_loans
+
+  - rule: Phòng đã đặt
+    steps:
+      - intent: ask_my_bookings
+      - action: action_my_bookings
+
+  - rule: Quy định mượn
+    steps:
+      - intent: ask_loan_rules
+      - action: action_loan_rules
+
+  - rule: Gia hạn
+    steps:
+      - intent: ask_renew
+      - action: action_loan_rules
+
+  - rule: Tiền phạt
+    steps:
+      - intent: ask_fine
+      - action: action_fine_rules
+
+  - rule: Giờ mở cửa
+    steps:
+      - intent: ask_opening_hours
+      - action: action_opening_hours
+
+  - rule: Làm thẻ
+    steps:
+      - intent: ask_card
+      - action: utter_card
+
+  - rule: Mua tài liệu
+    steps:
+      - intent: ask_buy_material
+      - action: action_search_material
+
+  - rule: Gợi ý sách
+    steps:
+      - intent: ask_recommend
+      - action: action_recommend_books
+
+  - rule: Không hiểu câu hỏi
+    steps:
+      - intent: nlu_fallback
+      - action: action_smart_fallback
+
+  - rule: Người dùng trả lời không phải
+    steps:
+      - intent: deny
+      - action: utter_anything_else

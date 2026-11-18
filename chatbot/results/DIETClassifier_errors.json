@@ -1,0 +1,978 @@
+[
+  {
+    "text": "bạn là người hay máy",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 17,
+        "end": 20,
+        "confidence_entity": 0.9870044589042664,
+        "value": "máy",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "cho mình hỏi cuốn hóa phân tích còn bản không",
+    "entities": [
+      {
+        "start": 18,
+        "end": 31,
+        "value": "hóa phân tích",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 18,
+        "end": 21,
+        "confidence_entity": 0.8573118448257446,
+        "value": "công nghệ hóa học",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      },
+      {
+        "entity": "book_title",
+        "start": 22,
+        "end": 31,
+        "confidence_entity": 0.9493536949157715,
+        "value": "phân tích",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "book_title",
+        "start": 36,
+        "end": 39,
+        "confidence_entity": 0.9994645714759827,
+        "value": "bản",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "có tài liệu về vi sinh vật không",
+    "entities": [
+      {
+        "start": 15,
+        "end": 26,
+        "value": "vi sinh vật",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "tra cứu sách tài chính doanh nghiệp",
+    "entities": [
+      {
+        "start": 13,
+        "end": 35,
+        "value": "tài chính doanh nghiệp",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "major",
+        "start": 23,
+        "end": 35,
+        "confidence_entity": 0.9961103796958923,
+        "value": "doanh nghiệp",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "tìm tài liệu tham khảo về python",
+    "entities": [
+      {
+        "start": 26,
+        "end": 32,
+        "value": "python",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "ngành tài chính ngân hàng có giáo trình nào",
+    "entities": [
+      {
+        "start": 6,
+        "end": 25,
+        "value": "tài chính ngân hàng",
+        "entity": "major"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "mình học hóa thì mượn sách gì",
+    "entities": [
+      {
+        "start": 9,
+        "end": 12,
+        "value": "hóa",
+        "entity": "major"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 9,
+        "end": 12,
+        "confidence_entity": 0.9812646508216858,
+        "value": "công nghệ hóa học",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "thứ 7 còn phòng nhóm không",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "value": "thứ 7",
+        "entity": "day"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "day",
+        "start": 0,
+        "end": 3,
+        "confidence_entity": 0.9986825585365295,
+        "value": "thứ",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "people",
+        "start": 4,
+        "end": 5,
+        "confidence_entity": 0.5675986409187317,
+        "value": "7",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "giá sách kinh tế vi mô",
+    "entities": [
+      {
+        "start": 9,
+        "end": 22,
+        "value": "kinh tế vi mô",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "major",
+        "start": 9,
+        "end": 13,
+        "confidence_entity": 0.9975866079330444,
+        "value": "kinh",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "major",
+        "start": 14,
+        "end": 16,
+        "confidence_entity": 0.5763406157493591,
+        "value": "tế",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "đề xuất vài cuốn sách cho mình",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 3,
+        "end": 7,
+        "confidence_entity": 0.5926966667175293,
+        "value": "xuất",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "ngành kế toán nên đọc sách gì",
+    "entities": [
+      {
+        "start": 6,
+        "end": 13,
+        "value": "kế toán",
+        "entity": "major"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 6,
+        "end": 13,
+        "confidence_entity": 0.6,
+        "value": "kế toán",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "sach xu ly ngon ngu tu nhien con khong",
+    "entities": [
+      {
+        "start": 5,
+        "end": 28,
+        "value": "xu ly ngon ngu tu nhien",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 8,
+        "end": 10,
+        "confidence_entity": 0.9961054921150208,
+        "value": "ly",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "book_title",
+        "start": 16,
+        "end": 22,
+        "confidence_entity": 0.9236671328544617,
+        "value": "ngu tu",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "giáo trình ngành kế toán có những cuốn nào",
+    "entities": [
+      {
+        "start": 17,
+        "end": 24,
+        "value": "kế toán",
+        "entity": "major"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 17,
+        "end": 24,
+        "confidence_entity": 0.7119131088256836,
+        "value": "kế toán",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "sach cho nganh quan tri kinh doanh",
+    "entities": [
+      {
+        "start": 15,
+        "end": 34,
+        "value": "quan tri kinh doanh",
+        "entity": "major"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "major",
+        "start": 20,
+        "end": 34,
+        "confidence_entity": 0.8,
+        "value": "tri kinh doanh",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "tai lieu tham khao nganh cong nghe thuc pham",
+    "entities": [
+      {
+        "start": 25,
+        "end": 44,
+        "value": "cong nghe thuc pham",
+        "entity": "major"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "major",
+        "start": 25,
+        "end": 34,
+        "confidence_entity": 0.9976534247398376,
+        "value": "cong nghe",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "có phòng trống sáng mai không",
+    "entities": [
+      {
+        "start": 15,
+        "end": 23,
+        "value": "sáng mai",
+        "entity": "time_of_day"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "time_of_day",
+        "start": 20,
+        "end": 23,
+        "confidence_entity": 0.9967363476753235,
+        "value": "mai",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "mượn phòng thứ 5 được không",
+    "entities": [
+      {
+        "start": 11,
+        "end": 16,
+        "value": "thứ 5",
+        "entity": "day"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "day",
+        "start": 11,
+        "end": 14,
+        "confidence_entity": 0.9927155375480652,
+        "value": "thứ",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "people",
+        "start": 15,
+        "end": 16,
+        "confidence_entity": 0.6468030214309692,
+        "value": "5",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "co phong trong sang mai khong",
+    "entities": [
+      {
+        "start": 15,
+        "end": 23,
+        "value": "sang mai",
+        "entity": "time_of_day"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "time_of_day",
+        "start": 20,
+        "end": 23,
+        "confidence_entity": 0.997986912727356,
+        "value": "mai",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "nhom 4 nguoi muon muon phong toi nay",
+    "entities": [
+      {
+        "start": 5,
+        "end": 6,
+        "value": "4",
+        "entity": "people"
+      },
+      {
+        "start": 29,
+        "end": 36,
+        "value": "toi nay",
+        "entity": "time_of_day"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "people",
+        "start": 5,
+        "end": 6,
+        "confidence_entity": 0.7952374219894409,
+        "value": "4",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      },
+      {
+        "entity": "time_of_day",
+        "start": 33,
+        "end": 36,
+        "confidence_entity": 0.9992828965187073,
+        "value": "nay",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "gợi ý sách về lập trình",
+    "entities": [
+      {
+        "start": 14,
+        "end": 23,
+        "value": "lập trình",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 14,
+        "end": 17,
+        "confidence_entity": 0.9969750642776489,
+        "value": "lập",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "gợi ý tài liệu ôn thi xác suất thống kê",
+    "entities": [
+      {
+        "start": 22,
+        "end": 39,
+        "value": "xác suất thống kê",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 31,
+        "end": 36,
+        "confidence_entity": 0.9935746788978577,
+        "value": "thống",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "mình đang nói chuyện với ai vậy",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 28,
+        "end": 31,
+        "confidence_entity": 0.794867217540741,
+        "value": "vậy",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "sách xử lý ngôn ngữ tự nhiên còn không",
+    "entities": [
+      {
+        "start": 5,
+        "end": 28,
+        "value": "xử lý ngôn ngữ tự nhiên",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 5,
+        "end": 10,
+        "confidence_entity": 0.7708526253700256,
+        "value": "xử lý",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "book_title",
+        "start": 16,
+        "end": 22,
+        "confidence_entity": 0.6089679002761841,
+        "value": "ngữ tự",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "co sach tri tue nhan tao khong",
+    "entities": [
+      {
+        "start": 8,
+        "end": 24,
+        "value": "tri tue nhan tao",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "major",
+        "start": 8,
+        "end": 11,
+        "confidence_entity": 0.7642548084259033,
+        "value": "tri",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "tim giao trinh marketing can ban",
+    "entities": [
+      {
+        "start": 15,
+        "end": 32,
+        "value": "marketing can ban",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 15,
+        "end": 24,
+        "confidence_entity": 0.774936318397522,
+        "value": "marketing",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "có sách gì cho khoa công nghệ hóa học",
+    "entities": [
+      {
+        "start": 20,
+        "end": 37,
+        "value": "công nghệ hóa học",
+        "entity": "major"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "major",
+        "start": 20,
+        "end": 29,
+        "confidence_entity": 0.9984325766563416,
+        "value": "công nghệ",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "major",
+        "start": 30,
+        "end": 33,
+        "confidence_entity": 0.9110843539237976,
+        "value": "công nghệ hóa học",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "nhóm 4 người muốn mượn phòng tối nay",
+    "entities": [
+      {
+        "start": 5,
+        "end": 6,
+        "value": "4",
+        "entity": "people"
+      },
+      {
+        "start": 29,
+        "end": 36,
+        "value": "tối nay",
+        "entity": "time_of_day"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "people",
+        "start": 5,
+        "end": 6,
+        "confidence_entity": 0.594679594039917,
+        "value": "4",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      },
+      {
+        "entity": "time_of_day",
+        "start": 33,
+        "end": 36,
+        "confidence_entity": 0.9977385997772217,
+        "value": "nay",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "có phòng họp nhóm nào trống bây giờ",
+    "entities": [
+      {
+        "start": 28,
+        "end": 35,
+        "value": "bây giờ",
+        "entity": "time_of_day"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "time_of_day",
+        "start": 32,
+        "end": 35,
+        "confidence_entity": 0.6235707402229309,
+        "value": "giờ",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "phong minh dat duoc duyet chua",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 20,
+        "end": 25,
+        "confidence_entity": 0.9613877534866333,
+        "value": "duyet",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "giáo trình cơ sở dữ liệu giá bao nhiêu",
+    "entities": [
+      {
+        "start": 11,
+        "end": 24,
+        "value": "cơ sở dữ liệu",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 11,
+        "end": 13,
+        "confidence_entity": 0.6101676225662231,
+        "value": "cơ",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "book_title",
+        "start": 17,
+        "end": 24,
+        "confidence_entity": 0.9992018342018127,
+        "value": "dữ liệu",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "thu vien con cuon lap trinh web khong",
+    "entities": [
+      {
+        "start": 18,
+        "end": 31,
+        "value": "lap trinh web",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 18,
+        "end": 21,
+        "confidence_entity": 0.5890442132949829,
+        "value": "lap",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "book_title",
+        "start": 28,
+        "end": 31,
+        "confidence_entity": 0.9989076852798462,
+        "value": "web",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "nganh tai chinh ngan hang co giao trinh nao",
+    "entities": [
+      {
+        "start": 6,
+        "end": 25,
+        "value": "tai chinh ngan hang",
+        "entity": "major"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "thanh toán tài liệu ra sao",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "major",
+        "start": 6,
+        "end": 10,
+        "confidence_entity": 0.6942940354347229,
+        "value": "toán",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "còn bán giáo trình mạng máy tính không",
+    "entities": [
+      {
+        "start": 19,
+        "end": 32,
+        "value": "mạng máy tính",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 28,
+        "end": 32,
+        "confidence_entity": 0.7588154077529907,
+        "value": "tính",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "sách phân tích thiết kế hệ thống để ở kệ nào",
+    "entities": [
+      {
+        "start": 5,
+        "end": 32,
+        "value": "phân tích thiết kế hệ thống",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 5,
+        "end": 14,
+        "confidence_entity": 0.8581392168998718,
+        "value": "phân tích",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "book_title",
+        "start": 21,
+        "end": 23,
+        "confidence_entity": 0.979048490524292,
+        "value": "kế",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "book_title",
+        "start": 24,
+        "end": 32,
+        "confidence_entity": 0.9499030113220215,
+        "value": "hệ thống",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "book_title",
+        "start": 38,
+        "end": 40,
+        "confidence_entity": 0.6270203590393066,
+        "value": "kệ",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "còn cuốn kiểm toán nào không",
+    "entities": [
+      {
+        "start": 9,
+        "end": 18,
+        "value": "kiểm toán",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "major",
+        "start": 14,
+        "end": 18,
+        "confidence_entity": 0.9639546275138855,
+        "value": "toán",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "giao trinh nganh ke toan co nhung cuon nao",
+    "entities": [
+      {
+        "start": 17,
+        "end": 24,
+        "value": "ke toan",
+        "entity": "major"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "major",
+        "start": 17,
+        "end": 19,
+        "confidence_entity": 0.5243092179298401,
+        "value": "ke",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "còn phòng lúc 9 giờ không",
+    "entities": [
+      {
+        "start": 10,
+        "end": 19,
+        "value": "lúc 9 giờ",
+        "entity": "time_of_day"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "time_of_day",
+        "start": 10,
+        "end": 13,
+        "confidence_entity": 0.99819415807724,
+        "value": "lúc",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "people",
+        "start": 14,
+        "end": 15,
+        "confidence_entity": 0.8402852416038513,
+        "value": "9",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "thứ 2 tuần sau mượn phòng được không",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "value": "thứ 2",
+        "entity": "day"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "day",
+        "start": 0,
+        "end": 3,
+        "confidence_entity": 0.9975825548171997,
+        "value": "thứ",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "people",
+        "start": 4,
+        "end": 5,
+        "confidence_entity": 0.6954638957977295,
+        "value": "2",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "dat phong hoc nhom luc 14h",
+    "entities": [
+      {
+        "start": 19,
+        "end": 26,
+        "value": "luc 14h",
+        "entity": "time_of_day"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 19,
+        "end": 26,
+        "confidence_entity": 0.5175542831420898,
+        "value": "luc 14h",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "bài giảng lập trình web bao nhiêu tiền",
+    "entities": [
+      {
+        "start": 10,
+        "end": 23,
+        "value": "lập trình web",
+        "entity": "book_title"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "book_title",
+        "start": 10,
+        "end": 23,
+        "confidence_entity": 0.9595555067062378,
+        "value": "lập trình web",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      },
+      {
+        "entity": "book_title",
+        "start": 34,
+        "end": 38,
+        "confidence_entity": 0.8565744757652283,
+        "value": "tiền",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  }
+]

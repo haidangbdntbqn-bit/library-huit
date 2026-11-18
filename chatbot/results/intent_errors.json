@@ -1,0 +1,450 @@
+[
+  {
+    "text": "hẹn gặp lại",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.4736160635948181
+    }
+  },
+  {
+    "text": "mình đi đây",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "ask_my_loans",
+      "confidence": 0.42926934361457825
+    }
+  },
+  {
+    "text": "có",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.8323289155960083
+    }
+  },
+  {
+    "text": "mình muốn mượn sách nguyên lý kế toán",
+    "intent": "ask_book",
+    "intent_prediction": {
+      "name": "ask_buy_material",
+      "confidence": 0.9343213438987732
+    }
+  },
+  {
+    "text": "có tài liệu về vi sinh vật không",
+    "intent": "ask_book",
+    "intent_prediction": {
+      "name": "ask_buy_material",
+      "confidence": 0.5764597654342651
+    }
+  },
+  {
+    "text": "tra cứu sách tài chính doanh nghiệp",
+    "intent": "ask_book",
+    "intent_prediction": {
+      "name": "ask_book_by_major",
+      "confidence": 0.933307409286499
+    }
+  },
+  {
+    "text": "tài liệu tham khảo ngành công nghệ thực phẩm",
+    "intent": "ask_book_by_major",
+    "intent_prediction": {
+      "name": "ask_book",
+      "confidence": 0.8664360642433167
+    }
+  },
+  {
+    "text": "mình học hóa thì mượn sách gì",
+    "intent": "ask_book_by_major",
+    "intent_prediction": {
+      "name": "ask_my_loans",
+      "confidence": 0.30282196402549744
+    }
+  },
+  {
+    "text": "xem lịch sử mượn sách",
+    "intent": "ask_my_loans",
+    "intent_prediction": {
+      "name": "ask_book",
+      "confidence": 0.45170819759368896
+    }
+  },
+  {
+    "text": "được mượn tối đa bao nhiêu cuốn",
+    "intent": "ask_loan_rules",
+    "intent_prediction": {
+      "name": "ask_buy_material",
+      "confidence": 0.21328432857990265
+    }
+  },
+  {
+    "text": "mượn sách được bao lâu",
+    "intent": "ask_loan_rules",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.432319700717926
+    }
+  },
+  {
+    "text": "sách đọc tại chỗ có mang về được không",
+    "intent": "ask_loan_rules",
+    "intent_prediction": {
+      "name": "ask_recommend",
+      "confidence": 0.8530402183532715
+    }
+  },
+  {
+    "text": "muốn mua sách hóa sinh thực phẩm",
+    "intent": "ask_buy_material",
+    "intent_prediction": {
+      "name": "ask_book",
+      "confidence": 0.9997486472129822
+    }
+  },
+  {
+    "text": "giá sách kinh tế vi mô",
+    "intent": "ask_buy_material",
+    "intent_prediction": {
+      "name": "ask_book_by_major",
+      "confidence": 0.5555167198181152
+    }
+  },
+  {
+    "text": "muốn học phân tích dữ liệu thì đọc sách nào",
+    "intent": "ask_recommend",
+    "intent_prediction": {
+      "name": "ask_book",
+      "confidence": 0.9941619038581848
+    }
+  },
+  {
+    "text": "được",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "ask_loan_rules",
+      "confidence": 0.9834485650062561
+    }
+  },
+  {
+    "text": "tư vấn mượn sách",
+    "intent": "ask_book",
+    "intent_prediction": {
+      "name": "ask_room",
+      "confidence": 0.9481104016304016
+    }
+  },
+  {
+    "text": "minh muon muon sach nguyen ly ke toan",
+    "intent": "ask_book",
+    "intent_prediction": {
+      "name": "ask_buy_material",
+      "confidence": 0.2206045538187027
+    }
+  },
+  {
+    "text": "giáo trình ngành kế toán có những cuốn nào",
+    "intent": "ask_book_by_major",
+    "intent_prediction": {
+      "name": "ask_book",
+      "confidence": 0.575145423412323
+    }
+  },
+  {
+    "text": "minh dang muon nhung sach gi",
+    "intent": "ask_my_loans",
+    "intent_prediction": {
+      "name": "ask_book_by_major",
+      "confidence": 0.5643202662467957
+    }
+  },
+  {
+    "text": "thư viện có bán sách trí tuệ nhân tạo không",
+    "intent": "ask_buy_material",
+    "intent_prediction": {
+      "name": "ask_book",
+      "confidence": 0.9952195286750793
+    }
+  },
+  {
+    "text": "sách nào được mượn nhiều nhất",
+    "intent": "ask_recommend",
+    "intent_prediction": {
+      "name": "ask_loan_rules",
+      "confidence": 0.9570559859275818
+    }
+  },
+  {
+    "text": "sach nao duoc muon nhieu nhat",
+    "intent": "ask_recommend",
+    "intent_prediction": {
+      "name": "ask_loan_rules",
+      "confidence": 0.9117617011070251
+    }
+  },
+  {
+    "text": "có ai không",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "ask_book",
+      "confidence": 0.3632834851741791
+    }
+  },
+  {
+    "text": "bai bai",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "ask_buy_material",
+      "confidence": 0.961600124835968
+    }
+  },
+  {
+    "text": "hen gap lai",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "ask_card",
+      "confidence": 0.2787834107875824
+    }
+  },
+  {
+    "text": "đúng rồi",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.3896666169166565
+    }
+  },
+  {
+    "text": "mình đang nói chuyện với ai vậy",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "ask_my_bookings",
+      "confidence": 0.6481451988220215
+    }
+  },
+  {
+    "text": "minh dang noi chuyen voi ai vay",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "ask_my_loans",
+      "confidence": 0.408458948135376
+    }
+  },
+  {
+    "text": "tìm giáo trình marketing căn bản",
+    "intent": "ask_book",
+    "intent_prediction": {
+      "name": "ask_buy_material",
+      "confidence": 0.6526334881782532
+    }
+  },
+  {
+    "text": "co sach tri tue nhan tao khong",
+    "intent": "ask_book",
+    "intent_prediction": {
+      "name": "ask_my_loans",
+      "confidence": 0.6968715786933899
+    }
+  },
+  {
+    "text": "tim giao trinh marketing can ban",
+    "intent": "ask_book",
+    "intent_prediction": {
+      "name": "ask_buy_material",
+      "confidence": 0.9460733532905579
+    }
+  },
+  {
+    "text": "mình đang mượn những sách gì",
+    "intent": "ask_my_loans",
+    "intent_prediction": {
+      "name": "ask_book_by_major",
+      "confidence": 0.9871426820755005
+    }
+  },
+  {
+    "text": "top sách thư viện",
+    "intent": "ask_recommend",
+    "intent_prediction": {
+      "name": "ask_opening_hours",
+      "confidence": 0.3681977093219757
+    }
+  },
+  {
+    "text": "gợi ý sách cho ngành công nghệ thông tin",
+    "intent": "ask_recommend",
+    "intent_prediction": {
+      "name": "ask_book_by_major",
+      "confidence": 0.9876789450645447
+    }
+  },
+  {
+    "text": "ban la nguoi hay may",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "ask_recommend",
+      "confidence": 0.7400099039077759
+    }
+  },
+  {
+    "text": "sinh viên CNTT nên mượn sách gì",
+    "intent": "ask_book_by_major",
+    "intent_prediction": {
+      "name": "ask_book",
+      "confidence": 0.5365006923675537
+    }
+  },
+  {
+    "text": "tư vấn mượn phòng",
+    "intent": "ask_room",
+    "intent_prediction": {
+      "name": "ask_book",
+      "confidence": 0.7255189418792725
+    }
+  },
+  {
+    "text": "lich muon phong cua minh",
+    "intent": "ask_my_bookings",
+    "intent_prediction": {
+      "name": "ask_my_loans",
+      "confidence": 0.6556556820869446
+    }
+  },
+  {
+    "text": "minh muon gia han sach",
+    "intent": "ask_renew",
+    "intent_prediction": {
+      "name": "ask_my_loans",
+      "confidence": 0.5538631677627563
+    }
+  },
+  {
+    "text": "lam mat sach thi sao",
+    "intent": "ask_fine",
+    "intent_prediction": {
+      "name": "ask_card",
+      "confidence": 0.7051543593406677
+    }
+  },
+  {
+    "text": "nen doc sach gi",
+    "intent": "ask_recommend",
+    "intent_prediction": {
+      "name": "ask_book_by_major",
+      "confidence": 0.8097386956214905
+    }
+  },
+  {
+    "text": "hi",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.5518884658813477
+    }
+  },
+  {
+    "text": "minh di day",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "ask_my_bookings",
+      "confidence": 0.5814868211746216
+    }
+  },
+  {
+    "text": "thoi nhe",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.3961566686630249
+    }
+  },
+  {
+    "text": "ok",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "thank",
+      "confidence": 0.9217628836631775
+    }
+  },
+  {
+    "text": "có sách trí tuệ nhân tạo không",
+    "intent": "ask_book",
+    "intent_prediction": {
+      "name": "ask_buy_material",
+      "confidence": 0.9995922446250916
+    }
+  },
+  {
+    "text": "sách phân tích thiết kế hệ thống để ở kệ nào",
+    "intent": "ask_book",
+    "intent_prediction": {
+      "name": "ask_recommend",
+      "confidence": 0.9993656277656555
+    }
+  },
+  {
+    "text": "có giáo trình hóa sinh thực phẩm chưa",
+    "intent": "ask_book",
+    "intent_prediction": {
+      "name": "ask_buy_material",
+      "confidence": 0.9629335403442383
+    }
+  },
+  {
+    "text": "sách ngành công nghệ thông tin",
+    "intent": "ask_book_by_major",
+    "intent_prediction": {
+      "name": "ask_recommend",
+      "confidence": 0.9530753493309021
+    }
+  },
+  {
+    "text": "lịch mượn phòng của mình",
+    "intent": "ask_my_bookings",
+    "intent_prediction": {
+      "name": "ask_my_loans",
+      "confidence": 0.7799205780029297
+    }
+  },
+  {
+    "text": "làm mất sách thì sao",
+    "intent": "ask_fine",
+    "intent_prediction": {
+      "name": "ask_card",
+      "confidence": 0.8431171774864197
+    }
+  },
+  {
+    "text": "nhà sách có bán marketing căn bản không",
+    "intent": "ask_buy_material",
+    "intent_prediction": {
+      "name": "ask_book",
+      "confidence": 0.9993871450424194
+    }
+  },
+  {
+    "text": "giao trinh co so du lieu gia bao nhieu",
+    "intent": "ask_buy_material",
+    "intent_prediction": {
+      "name": "ask_book",
+      "confidence": 0.650544285774231
+    }
+  },
+  {
+    "text": "mua giao trinh nguyen ly ke toan",
+    "intent": "ask_buy_material",
+    "intent_prediction": {
+      "name": "ask_book",
+      "confidence": 0.9843305945396423
+    }
+  },
+  {
+    "text": "sách hay về marketing",
+    "intent": "ask_recommend",
+    "intent_prediction": {
+      "name": "ask_book",
+      "confidence": 0.9078830480575562
+    }
+  }
+]

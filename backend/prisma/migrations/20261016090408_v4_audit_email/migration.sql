@@ -1,0 +1,20 @@
+BEGIN TRY
+
+BEGIN TRAN;
+
+-- AlterTable
+ALTER TABLE [dbo].[BookCopy] DROP CONSTRAINT [BookCopy_condition_df];
+ALTER TABLE [dbo].[BookCopy] ADD CONSTRAINT [BookCopy_condition_df] DEFAULT 'Tốt' FOR [condition];
+
+COMMIT TRAN;
+
+END TRY
+BEGIN CATCH
+
+IF @@TRANCOUNT > 0
+BEGIN
+    ROLLBACK TRAN;
+END;
+THROW
+
+END CATCH

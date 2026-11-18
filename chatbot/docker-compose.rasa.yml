@@ -1,0 +1,34 @@
+# Chạy Rasa bằng Docker, không cần cài Python 3.10.
+# Image Rasa chỉ có bản x86_64 nên trên Mac chip Apple sẽ chạy qua Rosetta (chậm hơn nhưng ổn định).
+#
+#   Huấn luyện:  docker compose -f docker-compose.rasa.yml run --rm rasa train
+#   Chạy:        docker compose -f docker-compose.rasa.yml up -d
+#   Xem log:     docker compose -f docker-compose.rasa.yml logs -f
+#   Dừng:        docker compose -f docker-compose.rasa.yml down
+services:
+  rasa:
+    image: rasa/rasa:3.6.20-full
+    platform: linux/amd64
+    user: root
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "5005:5005"
+    command: ["run", "--endpoints", "endpoints.docker.yml", "--port", "5005"]
+    depends_on:
+      - actions
+
+  actions:
+    build:
+      context: .
+      dockerfile: Dockerfile.actions
+    platform: linux/amd64
+    volumes:
+      - ./actions:/app/actions
+    environment:
+      # Backend chạy trên máy Mac, container gọi ra ngoài qua host.docker.internal
+      BACKEND_URL: "http://host.docker.internal:5000/api"
+      INTERNAL_API_KEY: "khoa-noi-bo-rasa"
+    ports:
+      - "5055:5055"

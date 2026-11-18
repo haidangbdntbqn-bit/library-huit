@@ -1,0 +1,58 @@
+@startuml UseCase
+' Sơ đồ use case tổng quát - mở bằng extension PlantUML trong VS Code (Alt+D)
+left to right direction
+skinparam packageStyle rectangle
+actor "Bạn đọc" as R
+actor "Thủ thư" as L
+actor "Quản trị viên" as A
+actor "Rasa Chatbot" as B <<system>>
+A -|> L
+
+rectangle "Hệ thống quản lý thư viện" {
+  usecase "Đăng nhập / đăng ký" as UC0
+  usecase "Tạo thẻ mượn" as UC1
+  usecase "Tìm và mượn sách" as UC2
+  usecase "Xem lịch sử mượn sách, mượn phòng" as UC3
+  usecase "Gia hạn sách" as UC4
+  usecase "Mượn phòng đọc / phòng nhóm" as UC5
+  usecase "Mua tài liệu bài giảng" as UC6
+  usecase "Hỏi đáp chatbot" as UC7
+
+  usecase "Lập phiếu mượn (về nhà / tại chỗ)" as UC10
+  usecase "Nhận trả sách (đúng hạn / trễ hạn)" as UC11
+  usecase "Quản lý đọc giả, vi phạm" as UC12
+  usecase "Duyệt thẻ mượn" as UC13
+  usecase "Quản lý sách, nhập, thanh lý" as UC14
+  usecase "Quản lý phòng, lịch mượn phòng" as UC15
+  usecase "Quản lý đơn tài liệu" as UC16
+  usecase "Báo cáo thống kê" as UC17
+
+  usecase "Quản lý nhân viên" as UC20
+  usecase "Quản lý tài khoản, phân quyền" as UC21
+  usecase "Cấu hình quy định" as UC22
+}
+
+R --> UC0
+R --> UC1
+R --> UC2
+R --> UC3
+R --> UC4
+R --> UC5
+R --> UC6
+R --> UC7
+UC7 --> B
+
+L --> UC0
+L --> UC10
+L --> UC11
+L --> UC12
+L --> UC13
+L --> UC14
+L --> UC15
+L --> UC16
+L --> UC17
+
+A --> UC20
+A --> UC21
+A --> UC22
+@enduml

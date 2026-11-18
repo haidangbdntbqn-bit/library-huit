@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "Prisma.prisma",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-mssql.mssql",
+    "ms-python.python",
+    "redhat.vscode-yaml",
+    "expo.vscode-expo-tools",
+    "jebbs.plantuml",
+    "bierner.markdown-mermaid"
+  ]
+}

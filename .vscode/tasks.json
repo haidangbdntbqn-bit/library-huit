@@ -1,0 +1,53 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Backend API",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "${workspaceFolder}/backend" },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Web",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "${workspaceFolder}/web" },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Rasa server",
+      "type": "shell",
+      "command": ".venv/bin/rasa run --port 5005",
+      "windows": { "command": ".venv\\Scripts\\rasa run --port 5005" },
+      "options": { "cwd": "${workspaceFolder}/chatbot" },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Rasa actions",
+      "type": "shell",
+      "command": ".venv/bin/rasa run actions",
+      "windows": { "command": ".venv\\Scripts\\rasa run actions" },
+      "options": { "cwd": "${workspaceFolder}/chatbot" },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Mobile (Expo)",
+      "type": "shell",
+      "command": "npx expo start",
+      "options": { "cwd": "${workspaceFolder}/mobile" },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Chạy toàn bộ hệ thống",
+      "dependsOn": ["Backend API", "Web", "Rasa server", "Rasa actions"],
+      "dependsOrder": "parallel",
+      "problemMatcher": []
+    }
+  ]
+}

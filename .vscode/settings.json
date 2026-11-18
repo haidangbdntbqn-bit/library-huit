@@ -1,0 +1,9 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[prisma]": { "editor.defaultFormatter": "Prisma.prisma" },
+  "[python]": { "editor.defaultFormatter": "ms-python.python" },
+  "python.defaultInterpreterPath": "${workspaceFolder}/chatbot/.venv/Scripts/python.exe",
+  "typescript.tsdk": "backend/node_modules/typescript/lib",
+  "files.exclude": { "**/node_modules": true, "**/.expo": true, "**/__pycache__": true }
+}

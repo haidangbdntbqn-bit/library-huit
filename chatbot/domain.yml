@@ -1,0 +1,104 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - thank
+  - affirm
+  - deny
+  - bot_challenge
+  - ask_book
+  - ask_book_by_major
+  - ask_room
+  - ask_my_loans
+  - ask_my_bookings
+  - ask_loan_rules
+  - ask_renew
+  - ask_fine
+  - ask_opening_hours
+  - ask_card
+  - ask_buy_material
+  - ask_recommend
+  - nlu_fallback
+
+entities:
+  - book_title
+  - major
+  - people
+  - time_of_day
+  - day
+
+slots:
+  book_title:
+    type: text
+    influence_conversation: false  # nhớ cuốn sách vừa nói tới để hỏi tiếp
+    mappings:
+      - type: from_entity
+        entity: book_title
+  major:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: major
+  people:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: people
+  time_of_day:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: time_of_day
+  day:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: day
+
+responses:
+  utter_greet:
+    - text: "Chào bạn! Mình là trợ lý thư viện HUIT. Bạn cần tìm sách, mượn phòng hay hỏi về quy định mượn trả?"
+      buttons:
+        - title: "Tìm sách"
+          payload: "/ask_book"
+        - title: "Tìm phòng học nhóm"
+          payload: "/ask_room"
+        - title: "Sách mình đang mượn"
+          payload: "/ask_my_loans"
+  utter_goodbye:
+    - text: "Chúc bạn học tốt! Cần gì cứ hỏi mình nhé."
+  utter_thank:
+    - text: "Không có gì, rất vui được giúp bạn!"
+  utter_iamabot:
+    - text: "Mình là trợ lý ảo của thư viện, được xây dựng bằng Rasa. Với câu hỏi phức tạp, bạn vui lòng liên hệ quầy thủ thư."
+  utter_ask_book_title:
+    - text: "Bạn muốn tìm sách gì? Hãy gõ tên sách, tác giả hoặc tên môn học, ví dụ: \"tìm sách cơ sở dữ liệu\"."
+  utter_card:
+    - text: "Thẻ sinh viên chính là thẻ thư viện. Bạn chỉ cần đăng ký tài khoản bằng MSSV trên web hoặc app, thẻ được kích hoạt ngay, không cần chờ duyệt, có hạn 6 năm kể từ năm nhập học."
+  utter_buy_material:
+    - text: "Bạn vào mục \"Nhà sách\" để mua giáo trình, sách tham khảo và tài liệu bài giảng. Có thể trả tiền mặt tại quầy hoặc chuyển khoản, thủ thư xác nhận rồi giao sách."
+  utter_default:
+    - text: "Xin lỗi, mình chưa hiểu câu hỏi. Bạn có thể hỏi về: tìm sách, phòng học nhóm còn trống, hạn trả sách, quy định mượn, tiền phạt, giờ mở cửa."
+  utter_anything_else:
+    - text: "Bạn cần mình hỗ trợ thêm gì không?"
+
+actions:
+  - action_search_book
+  - action_find_room
+  - action_my_loans
+  - action_my_bookings
+  - action_loan_rules
+  - action_opening_hours
+  - action_fine_rules
+  - action_recommend_books
+  - action_search_material
+  - action_smart_fallback
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: false

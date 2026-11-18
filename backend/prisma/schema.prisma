@@ -1,0 +1,362 @@
+// ==============================================================
+//  CSDL Hệ thống Quản lý Thư viện - ĐH Công Thương TP.HCM
+//  Hệ quản trị: SQL Server
+//  Lưu ý: Prisma không hỗ trợ enum trên SQL Server nên các trạng thái
+//  được lưu dạng chuỗi. Danh sách giá trị hợp lệ ghi ở comment
+//  và được kiểm tra ở tầng API (src/utils/constants.ts).
+//  Mọi khóa ngoại dùng NoAction để tránh lỗi "multiple cascade paths"
+//  của SQL Server; hệ thống khóa (isActive/status) thay vì xóa cứng.
+// ==============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+// ---------- Danh mục ----------
+
+// Khoa quản lý ngành; dùng để thống kê theo khoa và chia hoa hồng bán sách, tài liệu
+model Faculty {
+  id             Int     @id @default(autoincrement())
+  code           String  @unique @db.NVarChar(20)
+  name           String  @db.NVarChar(150)
+  commissionRate Decimal @default(5) @db.Decimal(5, 2) // % hoa hồng trên doanh thu bán sách, tài liệu của khoa
+  majors         Major[]
+}
+
+model Major {
+  id        Int        @id @default(autoincrement())
+  code      String     @unique @db.NVarChar(20)
+  name      String     @db.NVarChar(150)
+  facultyId Int?
+  faculty   Faculty?   @relation(fields: [facultyId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  books     Book[]
+  readers   Reader[]
+  materials Material[]
+}
+
+model Setting {
+  key   String @id @db.NVarChar(50)
+  value String @db.NVarChar(200)
+}
+
+// ---------- Người dùng ----------
+
+model User {
+  id           Int       @id @default(autoincrement())
+  username     String    @unique @db.NVarChar(50)
+  passwordHash String    @db.NVarChar(200)
+  fullName     String    @db.NVarChar(150)
+  email        String?   @db.NVarChar(150)
+  phone        String?   @db.NVarChar(20)
+  role         String    @default("READER") @db.NVarChar(20) // READER | LIBRARIAN | ADMIN
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  reader       Reader?
+  staff        Staff?
+  chatLogs     ChatLog[]
+}
+
+model Reader {
+  id              Int             @id @default(autoincrement())
+  userId          Int             @unique
+  user            User            @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  studentCode     String          @unique @db.NVarChar(20) // MSSV / mã cán bộ
+  readerType      String          @default("STUDENT") @db.NVarChar(20) // STUDENT | LECTURER | STAFF
+  majorId         Int?
+  major           Major?          @relation(fields: [majorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  className       String?         @db.NVarChar(30)
+  status          String          @default("ACTIVE") @db.NVarChar(20) // ACTIVE | SUSPENDED
+  maxBooks        Int             @default(5)
+  createdAt       DateTime        @default(now())
+  card            LibraryCard?
+  loans           Loan[]
+  violations      Violation[]
+  bookings        RoomBooking[]
+  orders          Order[]
+  borrowRequests  BorrowRequest[]
+}
+
+model LibraryCard {
+  id         Int       @id @default(autoincrement())
+  readerId   Int       @unique
+  reader     Reader    @relation(fields: [readerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  cardNumber String?   @db.NVarChar(30) // dùng MSSV / mã cán bộ (thẻ sinh viên là thẻ thư viện)
+  status     String    @default("ACTIVE") @db.NVarChar(20) // ACTIVE | LOCKED | EXPIRED
+  requestedAt DateTime @default(now())
+  issuedAt   DateTime?
+  expiresAt  DateTime?
+  note       String?   @db.NVarChar(300)
+}
+
+model Staff {
+  id           Int           @id @default(autoincrement())
+  userId       Int           @unique
+  user         User          @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  staffCode    String        @unique @db.NVarChar(20)
+  position     String        @db.NVarChar(100)
+  hiredAt      DateTime?
+  loans        Loan[]
+  imports      BookImport[]
+  liquidations Liquidation[]
+}
+
+// ---------- Sách, giáo trình, tài liệu tham khảo ----------
+
+model Book {
+  id             Int             @id @default(autoincrement())
+  code           String          @unique @db.NVarChar(30)
+  title          String          @db.NVarChar(300)
+  author         String          @db.NVarChar(200)
+  publisher      String?         @db.NVarChar(200)
+  publishYear    Int?
+  isbn           String?         @db.NVarChar(20)
+  docType        String          @db.NVarChar(20) // GIAO_TRINH | TLTK
+  majorId        Int?
+  major          Major?          @relation(fields: [majorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  shelf          String?         @db.NVarChar(30) // vị trí kệ
+  description    String?         @db.NVarChar(Max)
+  coverUrl       String?         @db.NVarChar(500)
+  createdAt      DateTime        @default(now())
+  copies         BookCopy[]
+  borrowRequests BorrowRequest[]
+}
+
+// Mỗi bản sách vật lý (có mã vạch riêng)
+model BookCopy {
+  id            Int          @id @default(autoincrement())
+  barcode       String       @unique @db.NVarChar(40)
+  bookId        Int
+  book          Book         @relation(fields: [bookId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  status        String       @default("AVAILABLE") @db.NVarChar(20) // AVAILABLE | RESERVED (giữ cho yêu cầu mượn) | BORROWED | DAMAGED | LOST | LIQUIDATED
+  onsiteOnly    Boolean      @default(false) // chỉ đọc tại chỗ
+  condition     String       @default("Tốt") @db.NVarChar(100)
+  importId      Int?
+  import        BookImport?  @relation(fields: [importId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  liquidationId Int?
+  liquidation   Liquidation? @relation(fields: [liquidationId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  createdAt     DateTime     @default(now())
+  loanItems     LoanItem[]
+  requests      BorrowRequest[]
+}
+
+// Phiếu nhập sách
+model BookImport {
+  id         Int        @id @default(autoincrement())
+  code       String     @unique @db.NVarChar(30)
+  staffId    Int
+  staff      Staff      @relation(fields: [staffId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  supplier   String?    @db.NVarChar(200)
+  totalCost  Decimal    @default(0) @db.Decimal(18, 2)
+  note       String?    @db.NVarChar(500)
+  importedAt DateTime   @default(now())
+  copies     BookCopy[]
+}
+
+// Phiếu thanh lý
+model Liquidation {
+  id        Int        @id @default(autoincrement())
+  code      String     @unique @db.NVarChar(30)
+  staffId   Int
+  staff     Staff      @relation(fields: [staffId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  reason    String     @db.NVarChar(500)
+  createdAt DateTime   @default(now())
+  copies    BookCopy[]
+}
+
+// ---------- Mượn - trả ----------
+
+// Bạn đọc đăng ký mượn trực tuyến, đến quầy nhận sách
+model BorrowRequest {
+  id           Int       @id @default(autoincrement())
+  readerId     Int
+  reader       Reader    @relation(fields: [readerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  bookId       Int
+  book         Book      @relation(fields: [bookId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  loanType     String    @default("HOME") @db.NVarChar(10) // HOME | ONSITE do bạn đọc chọn khi đặt
+  copyId       Int? // bản sách thủ thư đã soạn, giữ cho bạn đọc
+  copy         BookCopy? @relation(fields: [copyId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  status       String    @default("PENDING") @db.NVarChar(20) // PENDING | READY | FULFILLED | REJECTED | CANCELLED
+  note         String?   @db.NVarChar(300)
+  pickupBefore DateTime?
+  createdAt    DateTime  @default(now())
+  handledAt    DateTime?
+}
+
+// Phiếu mượn
+model Loan {
+  id         Int        @id @default(autoincrement())
+  code       String     @unique @db.NVarChar(30)
+  readerId   Int
+  reader     Reader     @relation(fields: [readerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  staffId    Int?
+  staff      Staff?     @relation(fields: [staffId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  loanType   String     @db.NVarChar(10) // HOME (mượn về nhà) | ONSITE (đọc tại chỗ)
+  status     String     @default("BORROWING") @db.NVarChar(20) // BORROWING | RETURNED
+  note       String?    @db.NVarChar(300)
+  borrowedAt DateTime   @default(now())
+  items      LoanItem[]
+}
+
+// Chi tiết phiếu mượn (mỗi bản sách)
+model LoanItem {
+  id              Int         @id @default(autoincrement())
+  loanId          Int
+  loan            Loan        @relation(fields: [loanId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  copyId          Int
+  copy            BookCopy    @relation(fields: [copyId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  dueAt           DateTime
+  renewCount      Int         @default(0)
+  returnedAt      DateTime?
+  returnCondition String?     @db.NVarChar(20) // GOOD | DAMAGED | LOST
+  fine            Decimal     @default(0) @db.Decimal(18, 2)
+  violations      Violation[]
+}
+
+// Vi phạm (trả trễ, làm hỏng, làm mất...)
+model Violation {
+  id          Int       @id @default(autoincrement())
+  readerId    Int
+  reader      Reader    @relation(fields: [readerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  loanItemId  Int?
+  loanItem    LoanItem? @relation(fields: [loanItemId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  bookingId   Int? // vi phạm khi trả phòng (làm hỏng, làm mất đồ đạc trong phòng)
+  booking     RoomBooking? @relation(fields: [bookingId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  type        String    @db.NVarChar(20) // LATE | DAMAGED | LOST | OTHER
+  description String    @db.NVarChar(500)
+  fineAmount  Decimal   @default(0) @db.Decimal(18, 2)
+  status      String    @default("UNPAID") @db.NVarChar(20) // UNPAID | PAID | WAIVED
+  createdAt   DateTime  @default(now())
+  resolvedAt  DateTime?
+}
+
+// ---------- Phòng đọc, phòng học nhóm ----------
+
+model Room {
+  id        Int           @id @default(autoincrement())
+  code      String        @unique @db.NVarChar(20)
+  name      String        @db.NVarChar(100)
+  roomType  String        @db.NVarChar(20) // READING (phòng đọc) | GROUP (phòng học nhóm)
+  capacity  Int
+  floor     String?       @db.NVarChar(20)
+  equipment String?       @db.NVarChar(300)
+  status    String        @default("AVAILABLE") @db.NVarChar(20) // AVAILABLE | MAINTENANCE
+  bookings  RoomBooking[]
+}
+
+model RoomBooking {
+  id           Int       @id @default(autoincrement())
+  code         String    @unique @db.NVarChar(30)
+  roomId       Int
+  room         Room      @relation(fields: [roomId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  readerId     Int
+  reader       Reader    @relation(fields: [readerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  startTime    DateTime
+  endTime      DateTime
+  people       Int
+  purpose      String?   @db.NVarChar(300)
+  status       String    @default("PENDING") @db.NVarChar(20) // PENDING | APPROVED | REJECTED | IN_USE | COMPLETED | CANCELLED
+  note         String?   @db.NVarChar(300)
+  createdAt    DateTime  @default(now())
+  checkedInAt  DateTime?
+  checkedOutAt DateTime?
+  // Kiểm tra tình trạng phòng khi trả phòng
+  roomCondition String?     @db.NVarChar(20) // GOOD (bình thường) | ISSUE (có hư hỏng / mất đồ)
+  inspection    String?     @db.NVarChar(2000) // JSON: [{ name, state: OK | DAMAGED | LOST, fee, note }]
+  damageFee     Decimal     @default(0) @db.Decimal(18, 2)
+  inspectedBy   String?     @db.NVarChar(100)
+  violations    Violation[]
+}
+
+// ---------- Bán tài liệu bài giảng ----------
+
+model Material {
+  id          Int         @id @default(autoincrement())
+  code        String      @unique @db.NVarChar(30)
+  title       String      @db.NVarChar(300)
+  lecturer    String?     @db.NVarChar(150)
+  majorId     Int?
+  major       Major?      @relation(fields: [majorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  category    String      @default("BAI_GIANG") @db.NVarChar(20) // BAI_GIANG | GIAO_TRINH | SACH_THAM_KHAO
+  format      String      @default("PRINT") @db.NVarChar(10) // PRINT (bản in) | DIGITAL (bản số)
+  price       Decimal     @db.Decimal(18, 2)
+  stock       Int         @default(0)
+  description String?     @db.NVarChar(Max)
+  isActive    Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  orderItems  OrderItem[]
+}
+
+model Order {
+  id            Int         @id @default(autoincrement())
+  code          String      @unique @db.NVarChar(30)
+  readerId      Int
+  reader        Reader      @relation(fields: [readerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  totalAmount   Decimal     @db.Decimal(18, 2)
+  paymentMethod String      @default("CASH") @db.NVarChar(20) // CASH | TRANSFER
+  status        String      @default("PENDING") @db.NVarChar(20) // PENDING | PAID | COMPLETED | CANCELLED
+  createdAt     DateTime    @default(now())
+  paidAt        DateTime?
+  items         OrderItem[]
+}
+
+model OrderItem {
+  id         Int      @id @default(autoincrement())
+  orderId    Int
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  materialId Int
+  material   Material @relation(fields: [materialId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  quantity   Int
+  unitPrice  Decimal  @db.Decimal(18, 2)
+}
+
+// ---------- Chatbot ----------
+
+model ChatLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  sessionId String   @db.NVarChar(80)
+  message   String   @db.NVarChar(1000)
+  reply     String   @db.NVarChar(Max)
+  createdAt DateTime @default(now())
+}
+
+/// Nhật ký thao tác của nhân viên (ai làm gì, lúc nào) để truy vết trách nhiệm
+model AuditLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int?
+  username  String?  @db.NVarChar(50)
+  role      String?  @db.NVarChar(20)
+  action    String   @db.NVarChar(80) // mô tả ngắn: "Lập phiếu mượn", "Thu tiền phạt"...
+  method    String   @db.NVarChar(10)
+  path      String   @db.NVarChar(200)
+  status    Int
+  detail    String?  @db.NVarChar(1000)
+  ip        String?  @db.NVarChar(64)
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([userId])
+}
+
+/// Thông báo đã gửi cho bạn đọc (email nhắc hạn trả...), tránh gửi trùng trong ngày
+model NotificationLog {
+  id        Int      @id @default(autoincrement())
+  readerId  Int
+  kind      String   @db.NVarChar(30) // DUE_SOON | OVERDUE | READY
+  refKey    String   @db.NVarChar(60) // ví dụ "loanItem:123:2026-10-14"
+  channel   String   @default("EMAIL") @db.NVarChar(10)
+  toAddress String?  @db.NVarChar(150)
+  subject   String   @db.NVarChar(200)
+  sent      Boolean  @default(false) // false = chỉ ghi log (chưa cấu hình SMTP)
+  createdAt DateTime @default(now())
+
+  @@unique([refKey, channel])
+  @@index([readerId])
+}

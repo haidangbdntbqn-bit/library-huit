@@ -1,0 +1,3 @@
+# Dùng khi chạy Rasa bằng Docker (docker-compose.rasa.yml): action server là container "actions"
+action_endpoint:
+  url: "http://actions:5055/webhook"

@@ -1,0 +1,306 @@
+version: "3.1"
+
+nlu:
+  - intent: greet
+    examples: |
+      - xin chào
+      - chào bạn
+      - chào
+      - hello
+      - hi
+      - alo
+      - chào ad
+      - chào thư viện
+      - bạn ơi
+      - có ai không
+      - xin chao
+      - chao ban
+      - chao
+      - chao ad
+      - chao thu vien
+      - ban oi
+
+  - intent: goodbye
+    examples: |
+      - tạm biệt
+      - bye
+      - hẹn gặp lại
+      - mình đi đây
+      - thôi nhé
+      - bai bai
+      - tam biet
+      - hen gap lai
+      - minh di day
+      - thoi nhe
+
+  - intent: thank
+    examples: |
+      - cảm ơn
+      - cám ơn bạn
+      - thanks
+      - cảm ơn nhiều nha
+      - ok cảm ơn
+      - tks
+      - cam on
+      - cam on ban
+      - cam on nhieu nha
+      - ok cam on
+
+  - intent: affirm
+    examples: |
+      - có
+      - đúng rồi
+      - ừ
+      - ok
+      - được
+      - vâng
+
+  - intent: deny
+    examples: |
+      - không
+      - không cần
+      - thôi
+      - không phải
+
+  - intent: bot_challenge
+    examples: |
+      - bạn là ai
+      - bạn là người hay máy
+      - bạn là bot à
+      - mình đang nói chuyện với ai vậy
+      - ban la ai
+      - ban la nguoi hay may
+      - ban la bot a
+      - minh dang noi chuyen voi ai vay
+
+  - intent: ask_book
+    examples: |
+      - tìm sách [cơ sở dữ liệu](book_title)
+      - có sách [trí tuệ nhân tạo](book_title) không
+      - thư viện còn cuốn [lập trình web](book_title) không
+      - mình muốn mượn sách [nguyên lý kế toán](book_title)
+      - tìm giáo trình [marketing căn bản](book_title)
+      - sách [xử lý ngôn ngữ tự nhiên](book_title) còn không
+      - cho mình hỏi cuốn [hóa phân tích](book_title) còn bản không
+      - có tài liệu về [vi sinh vật](book_title) không
+      - tra cứu sách [tài chính doanh nghiệp](book_title)
+      - tìm sách
+      - mình muốn tìm sách
+      - tư vấn mượn sách
+      - sách [phân tích thiết kế hệ thống](book_title) để ở kệ nào
+      - còn cuốn [kiểm toán](book_title) nào không
+      - tìm tài liệu tham khảo về [python](book_title)
+      - có giáo trình [hóa sinh thực phẩm](book_title) chưa
+      - mượn sách [cấu trúc dữ liệu](book_title)
+      - tim sach [co so du lieu](book_title)
+      - co sach [tri tue nhan tao](book_title) khong
+      - thu vien con cuon [lap trinh web](book_title) khong
+      - minh muon muon sach [nguyen ly ke toan](book_title)
+      - tim giao trinh [marketing can ban](book_title)
+      - sach [xu ly ngon ngu tu nhien](book_title) con khong
+
+  - intent: ask_book_by_major
+    examples: |
+      - sách ngành [công nghệ thông tin](major)
+      - giáo trình ngành [kế toán](major) có những cuốn nào
+      - sách cho ngành [quản trị kinh doanh](major)
+      - sinh viên [CNTT](major) nên mượn sách gì
+      - tài liệu tham khảo ngành [công nghệ thực phẩm](major)
+      - ngành [tài chính ngân hàng](major) có giáo trình nào
+      - mình học [hóa](major) thì mượn sách gì
+      - có sách gì cho khoa [công nghệ hóa học](major)
+      - sach nganh [cong nghe thong tin](major)
+      - giao trinh nganh [ke toan](major) co nhung cuon nao
+      - sach cho nganh [quan tri kinh doanh](major)
+      - sinh vien [CNTT](major) nen muon sach gi
+      - tai lieu tham khao nganh [cong nghe thuc pham](major)
+      - nganh [tai chinh ngan hang](major) co giao trinh nao
+
+  - intent: ask_room
+    examples: |
+      - còn phòng học nhóm không
+      - còn phòng nhóm cho [5](people) người [chiều nay](time_of_day) không
+      - mình muốn mượn phòng cho [6](people) người
+      - có phòng trống [sáng mai](time_of_day) không
+      - đặt phòng học nhóm [lúc 14h](time_of_day)
+      - nhóm [4](people) người muốn mượn phòng [tối nay](time_of_day)
+      - phòng đọc còn chỗ không
+      - tư vấn mượn phòng
+      - tìm phòng học nhóm [chiều mai](time_of_day) cho [8](people) bạn
+      - [3](people) người thì mượn phòng nào
+      - còn phòng [lúc 9 giờ](time_of_day) không
+      - mượn phòng [thứ 5](day) được không
+      - [thứ 7](day) còn phòng nhóm không
+      - [thứ 2](day) tuần sau mượn phòng được không
+      - có phòng họp nhóm nào trống [bây giờ](time_of_day)
+      - con phong hoc nhom khong
+      - con phong nhom cho [5](people) nguoi [chieu nay](time_of_day) khong
+      - minh muon muon phong cho [6](people) nguoi
+      - co phong trong [sang mai](time_of_day) khong
+      - dat phong hoc nhom [luc 14h](time_of_day)
+      - nhom [4](people) nguoi muon muon phong [toi nay](time_of_day)
+
+  - intent: ask_my_loans
+    examples: |
+      - sách mình đang mượn khi nào hết hạn
+      - mình đang mượn những sách gì
+      - hạn trả sách của mình
+      - khi nào mình phải trả sách
+      - kiểm tra sách đang mượn
+      - mình có sách nào quá hạn không
+      - xem lịch sử mượn sách
+      - sách của tôi hết hạn chưa
+      - sach minh dang muon khi nao het han
+      - minh dang muon nhung sach gi
+      - han tra sach cua minh
+      - khi nao minh phai tra sach
+      - kiem tra sach dang muon
+      - minh co sach nao qua han khong
+
+  - intent: ask_my_bookings
+    examples: |
+      - lịch mượn phòng của mình
+      - mình đã đặt phòng nào
+      - kiểm tra lượt đặt phòng
+      - phòng mình đặt được duyệt chưa
+      - lich muon phong cua minh
+      - minh da dat phong nao
+      - kiem tra luot dat phong
+      - phong minh dat duoc duyet chua
+
+  - intent: ask_loan_rules
+    examples: |
+      - quy định mượn sách
+      - được mượn tối đa bao nhiêu cuốn
+      - mượn sách được bao lâu
+      - mượn về nhà được mấy ngày
+      - quy định mượn trả thế nào
+      - sách đọc tại chỗ có mang về được không
+      - thủ tục mượn sách
+      - quy dinh muon sach
+      - duoc muon toi da bao nhieu cuon
+      - muon sach duoc bao lau
+      - muon ve nha duoc may ngay
+      - quy dinh muon tra the nao
+      - sach doc tai cho co mang ve duoc khong
+
+  - intent: ask_renew
+    examples: |
+      - gia hạn sách thế nào
+      - làm sao để gia hạn
+      - mình muốn gia hạn sách
+      - được gia hạn mấy lần
+      - có gia hạn online được không
+      - gia han sach the nao
+      - lam sao de gia han
+      - minh muon gia han sach
+      - duoc gia han may lan
+      - co gia han online duoc khong
+
+  - intent: ask_fine
+    examples: |
+      - trả sách trễ bị phạt bao nhiêu
+      - tiền phạt quá hạn
+      - làm mất sách thì sao
+      - làm rách sách có bị phạt không
+      - phạt trễ hạn mỗi ngày bao nhiêu
+      - tra sach tre bi phat bao nhieu
+      - tien phat qua han
+      - lam mat sach thi sao
+      - lam rach sach co bi phat khong
+      - phat tre han moi ngay bao nhieu
+
+  - intent: ask_opening_hours
+    examples: |
+      - thư viện mở cửa mấy giờ
+      - giờ mở cửa
+      - mấy giờ thư viện đóng cửa
+      - thư viện làm việc giờ nào
+      - tối thư viện có mở không
+      - thu vien mo cua may gio
+      - gio mo cua
+      - may gio thu vien dong cua
+      - thu vien lam viec gio nao
+      - toi thu vien co mo khong
+
+  - intent: ask_card
+    examples: |
+      - làm thẻ thư viện thế nào
+      - đăng ký thẻ mượn
+      - tạo thẻ mượn
+      - thẻ mượn hết hạn thì làm sao
+      - cách làm thẻ
+      - lam the thu vien the nao
+      - dang ky the muon
+      - tao the muon
+      - the muon het han thi lam sao
+      - cach lam the
+
+  - intent: ask_buy_material
+    examples: |
+      - mua tài liệu bài giảng ở đâu
+      - mua giáo trình
+      - mua bài giảng thế nào
+      - thanh toán tài liệu ra sao
+      - giáo trình [cơ sở dữ liệu](book_title) giá bao nhiêu
+      - mua giáo trình [nguyên lý kế toán](book_title)
+      - nhà sách có bán [marketing căn bản](book_title) không
+      - bài giảng [lập trình web](book_title) bao nhiêu tiền
+      - muốn mua sách [hóa sinh thực phẩm](book_title)
+      - thư viện có bán sách [trí tuệ nhân tạo](book_title) không
+      - giá sách [kinh tế vi mô](book_title)
+      - còn bán giáo trình [mạng máy tính](book_title) không
+      - mua tai lieu bai giang o dau
+      - mua giao trinh
+      - mua bai giang the nao
+      - thanh toan tai lieu ra sao
+      - giao trinh [co so du lieu](book_title) gia bao nhieu
+      - mua giao trinh [nguyen ly ke toan](book_title)
+
+  - intent: ask_recommend
+    examples: |
+      - gợi ý sách cho mình
+      - gợi ý sách hay
+      - nên đọc sách gì
+      - sách nào được mượn nhiều nhất
+      - có sách gì hay không
+      - đề xuất vài cuốn sách cho mình
+      - mình học năm nhất nên đọc gì
+      - gợi ý sách về [lập trình](book_title)
+      - muốn học [phân tích dữ liệu](book_title) thì đọc sách nào
+      - sách hay về [marketing](book_title)
+      - nên đọc gì để học [kế toán](book_title)
+      - gợi ý tài liệu ôn thi [xác suất thống kê](book_title)
+      - top sách thư viện
+      - sách hot tháng này
+      - gợi ý sách cho ngành [công nghệ thông tin](major)
+      - ngành [kế toán](major) nên đọc sách gì
+      - goi y sach cho minh
+      - goi y sach hay
+      - nen doc sach gi
+      - sach nao duoc muon nhieu nhat
+      - co sach gi hay khong
+      - de xuat vai cuon sach cho minh
+
+  - synonym: công nghệ thông tin
+    examples: |
+      - cntt
+      - CNTT
+      - it
+      - tin học
+  - synonym: kế toán
+    examples: |
+      - kt
+      - kế toán kiểm toán
+  - synonym: quản trị kinh doanh
+    examples: |
+      - qtkd
+      - quản trị
+  - synonym: công nghệ thực phẩm
+    examples: |
+      - thực phẩm
+      - cntp
+  - synonym: công nghệ hóa học
+    examples: |
+      - hóa
+      - hoá học

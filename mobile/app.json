@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "Thư viện HUIT",
+    "slug": "library-huit",
+    "scheme": "libraryhuit",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Cho phép Thư viện HUIT dùng camera để quét mã vạch trên sách."
+        }
+      ],
+      "expo-status-bar",
+      "expo-font"
+    ],
+    "android": {
+      "package": "vn.edu.huit.library",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0B4DA2"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "vn.edu.huit.library"
+    },
+    "icon": "./assets/icon.png"
+  }
+}
