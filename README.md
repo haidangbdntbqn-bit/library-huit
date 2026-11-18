@@ -4,13 +4,12 @@
 
 Hệ thống quản lý thư viện cho trường đại học gồm **website bạn đọc và quản trị**, **ứng dụng di động** và **chatbot tiếng Việt**, cùng dùng chung một REST API (Node.js + TypeScript) và CSDL SQL Server. Đây là khóa luận tốt nghiệp của nhóm 3 người.
 
-▶ **Video demo:** <!-- DÁN LINK YOUTUBE VÀO ĐÂY --> https://youtu.be/...
 
 | Trang chủ bạn đọc | Lập phiếu mượn (thủ thư) |
 |---|---|
 | ![Trang chủ](docs/images/web-ban-doc.png) | ![Lập phiếu mượn](docs/images/web-lap-phieu.png) |
-| **Báo cáo thống kê** | **App di động và chatbot** |
-| ![Báo cáo](docs/images/web-bao-cao.png) | ![App](docs/images/app-chatbot.png) |
+| **Báo cáo thống kê** | **App di động (React Native)** |
+| ![Báo cáo](docs/images/web-bao-cao.png) | <img src="docs/images/app-tra-cuu.jpg" width="180"> <img src="docs/images/app-sach-cua-toi.jpg" width="180"> |
 
 ## Chức năng chính
 
