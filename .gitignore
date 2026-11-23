@@ -12,3 +12,5 @@ __pycache__
 _backup_truoc_v5/
 _nop/
 .DS_Store
+.env.prod
+*.tsbuildinfo

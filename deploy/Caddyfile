@@ -1,0 +1,12 @@
+# Caddy tự xin chứng chỉ HTTPS cho tên miền trong SITE_ADDRESS
+{$SITE_ADDRESS} {
+	encode gzip
+	handle /api/* {
+		reverse_proxy backend:5000
+	}
+	handle {
+		root * /srv
+		try_files {path} /index.html
+		file_server
+	}
+}

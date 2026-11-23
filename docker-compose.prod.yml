@@ -1,0 +1,85 @@
+# Triển khai toàn bộ hệ thống trên một máy chủ Linux (xem docs/deploy-azure.md)
+#   Chạy:     docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build
+#   Xem log:  docker compose -f docker-compose.prod.yml logs -f backend
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${DB_PASSWORD}
+      MSSQL_PID: "Developer"
+      MSSQL_MEMORY_LIMIT_MB: "2048"
+      TZ: "Asia/Ho_Chi_Minh"
+    volumes:
+      - sqldata:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q \"IF DB_ID('LibraryHUIT') IS NULL CREATE DATABASE LibraryHUIT\" || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 20
+      start_period: 30s
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PORT: 5000
+      DATABASE_URL: "sqlserver://db:1433;database=LibraryHUIT;user=sa;password={${DB_PASSWORD}};trustServerCertificate=true"
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: "7d"
+      CORS_ORIGIN: "*"
+      RASA_URL: "http://rasa:5005"
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY}
+      TZ: "Asia/Ho_Chi_Minh"
+      WEB_URL: "https://${SITE_ADDRESS}"
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+
+  rasa:
+    image: rasa/rasa:3.6.20-full
+    restart: unless-stopped
+    user: root
+    working_dir: /app
+    volumes:
+      - ./chatbot:/app
+    # Lần chạy đầu chưa có model thì tự huấn luyện (khoảng 5–10 phút)
+    entrypoint: ["bash", "-c", "ls models/*.tar.gz >/dev/null 2>&1 || rasa train; exec rasa run --endpoints endpoints.docker.yml --port 5005"]
+    depends_on:
+      - actions
+
+  actions:
+    build:
+      context: ./chatbot
+      dockerfile: Dockerfile.actions
+    restart: unless-stopped
+    volumes:
+      - ./chatbot/actions:/app/actions
+    environment:
+      BACKEND_URL: "http://backend:5000/api"
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY}
+
+  web:
+    build: ./web
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  sqldata:
+  caddy_data:
+  caddy_config:
