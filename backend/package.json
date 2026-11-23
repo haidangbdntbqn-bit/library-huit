@@ -15,6 +15,7 @@
     "db:studio": "prisma studio",
     "db:sql": "prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > ../database/schema.sql",
     "db:seed:demo": "tsx prisma/seed-demo.ts",
+    "db:restore-books": "tsx prisma/restore-books.ts",
     "test": "vitest run"
   },
   "prisma": {

@@ -1,28 +1,37 @@
+import { useState } from "react";
 import type { Book } from "../types";
+import GeneratedCover from "./GeneratedCover";
 
-const PALETTE = ["#1E3A5F", "#7C2D12", "#365314", "#4C1D95", "#0B4DA2", "#8A6A2E", "#9F1239", "#334155"];
+type CoverBook = Pick<Book, "code" | "title" | "docType" | "coverUrl"> & Partial<Pick<Book, "author" | "publisher" | "publishYear" | "major">>;
 
-function hash(s: string) {
-  let h = 0;
-  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
-  return Math.abs(h);
-}
-
-/** Bìa sách: dùng ảnh nếu có, nếu không thì tự sinh màu theo mã sách */
-export default function BookCover({ book, width }: { book: Pick<Book, "code" | "title" | "docType" | "coverUrl">; width?: number }) {
-  if (book.coverUrl) {
+/** Bìa sách: dùng ảnh nếu có link, nếu không (hoặc ảnh lỗi) thì tự sinh bìa từ dữ liệu sách */
+export default function BookCover({ book, width }: { book: CoverBook; width?: number }) {
+  const [failedUrl, setFailedUrl] = useState<string | null>(null);
+  if (book.coverUrl && failedUrl !== book.coverUrl) {
     return (
       <img
         src={book.coverUrl}
         alt={`Bìa sách ${book.title}`}
-        style={{ width: width ?? "100%", aspectRatio: "3 / 4", objectFit: "cover", borderRadius: "4px 10px 10px 4px" }}
+        loading="lazy"
+        onError={() => setFailedUrl(book.coverUrl ?? null)}
+        style={{ width: width ?? "100%", aspectRatio: "3 / 4", objectFit: "cover", borderRadius: "3px 8px 8px 3px" }}
       />
     );
   }
+  const note = [book.publisher, book.publishYear].filter(Boolean).join(" · ");
   return (
-    <div className="book-cover" style={{ background: PALETTE[hash(book.code) % PALETTE.length], width }} aria-hidden>
-      <span className="type">{book.docType === "GIAO_TRINH" ? "Giáo trình" : "Tài liệu tham khảo"}</span>
-      <span className="title">{book.title}</span>
-    </div>
+    <GeneratedCover
+      width={width}
+      info={{
+        seed: book.code,
+        kind: book.docType === "GIAO_TRINH" ? "Giáo trình" : "Tài liệu tham khảo",
+        title: book.title,
+        author: book.author,
+        majorCode: book.major?.code,
+        majorName: book.major ? `Ngành ${book.major.name}` : "Dùng chung các ngành",
+        footnote: note || null,
+        light: book.docType !== "GIAO_TRINH",
+      }}
+    />
   );
 }

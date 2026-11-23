@@ -4,18 +4,26 @@ import { api } from "../api";
 import type { Material } from "../types";
 import { label, money } from "../utils/format";
 import StatusTag from "./StatusTag";
+import GeneratedCover from "./GeneratedCover";
 
-const PALETTE = ["#1E3A5F", "#7C2D12", "#365314", "#4C1D95", "#0B4DA2", "#8A6A2E", "#9F1239", "#334155"];
 const CAT_TEXT: Record<string, string> = { BAI_GIANG: "Bài giảng", GIAO_TRINH: "Giáo trình", SACH_THAM_KHAO: "Sách tham khảo" };
-const hash = (s: string) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) | 0, 0);
 
-/** Bìa tự sinh theo mã tài liệu */
+/** Bìa tự sinh từ dữ liệu tài liệu (tên, giảng viên, ngành) */
 export function MaterialCover({ m, width }: { m: Material; width?: number }) {
   return (
-    <div className="book-cover" style={{ background: PALETTE[Math.abs(hash(m.code)) % PALETTE.length], width }} aria-hidden>
-      <span className="type">{CAT_TEXT[m.category] ?? "Tài liệu"}</span>
-      <span className="title">{m.title}</span>
-    </div>
+    <GeneratedCover
+      width={width}
+      info={{
+        seed: m.code,
+        kind: CAT_TEXT[m.category] ?? "Tài liệu",
+        title: m.title,
+        author: m.lecturer,
+        majorCode: m.major?.code,
+        majorName: m.major ? `Ngành ${m.major.name}` : "Dùng chung các ngành",
+        footnote: m.format === "DIGITAL" ? "Bản số · Nhà sách thư viện HUIT" : "Bản in · Nhà sách thư viện HUIT",
+        light: m.category === "SACH_THAM_KHAO",
+      }}
+    />
   );
 }
 

@@ -568,3 +568,94 @@ a {
 
 /* Trả phòng: dòng thiết bị hư hỏng / bị mất */
 .inspect-issue > td { background: #fff4ec !important; }
+
+/* Bìa sách tự sinh (GeneratedCover) — cỡ chữ theo chiều rộng bìa */
+.gcover {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  container-type: inline-size;
+  border-radius: 3px 8px 8px 3px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-display);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.14), 0 8px 18px rgba(15, 23, 42, 0.12);
+}
+.gcover::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5.5%;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.04));
+  z-index: 1;
+}
+.gcover .gc-motif {
+  position: absolute;
+  right: -12%;
+  top: -10%;
+  width: 78%;
+  opacity: 0.16;
+  pointer-events: none;
+}
+.gcover .gc-body {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3cqw;
+  padding: 10cqw 8cqw 6cqw 12cqw;
+  min-height: 0;
+}
+.gcover .gc-bar {
+  width: 14cqw;
+  height: 1.6cqw;
+  border-radius: 1cqw;
+}
+.gcover .gc-kind {
+  font-size: 4.8cqw;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.gcover .gc-title {
+  margin-top: 2cqw;
+  font-size: 10cqw;
+  font-weight: 700;
+  line-height: 1.14;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+.gcover .gc-author {
+  font-size: 5.2cqw;
+  line-height: 1.3;
+  opacity: 0.85;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.gcover .gc-foot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8cqw;
+  padding: 4.5cqw 8cqw 5cqw 12cqw;
+  font-size: 4.4cqw;
+  line-height: 1.3;
+}
+.gcover .gc-major,
+.gcover .gc-note {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.gcover .gc-major {
+  font-weight: 600;
+}
+.gcover .gc-note {
+  opacity: 0.75;
+}
