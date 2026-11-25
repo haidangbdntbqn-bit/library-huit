@@ -8,6 +8,7 @@ import { READER_TYPES } from "../../utils/constants";
 import { HttpError, asyncHandler, badRequest, conflict } from "../../utils/http";
 import { newCardData } from "../cards/cards.routes";
 import { publicUser, toAuthUser } from "./auth.service";
+import { LOGIN_LOCK_MS, LOGIN_MAX_FAILS, attemptsLeft, loginGuard } from "./loginGuard";
 
 const router = Router();
 
@@ -21,10 +22,21 @@ router.post(
   validate(loginSchema),
   asyncHandler(async (req, res) => {
     const { username, password } = req.body as z.infer<typeof loginSchema>;
+    // Đang bị tạm khóa vì sai quá nhiều lần: từ chối ngay, kể cả khi lần này nhập đúng
+    const wait = loginGuard.remaining(username);
+    if (wait > 0) {
+      throw new HttpError(429, `Bạn đăng nhập sai quá nhiều lần. Vui lòng thử lại sau ${Math.ceil(wait / 60_000)} phút`);
+    }
     const user = await prisma.user.findUnique({ where: { username }, include: { reader: true, staff: true } });
     if (!user || !(await bcrypt.compare(password, user.passwordHash))) {
-      throw new HttpError(401, "Sai tên đăng nhập hoặc mật khẩu");
+      const state = loginGuard.fail(username);
+      if (state.lockedUntil) {
+        throw new HttpError(429, `Bạn đăng nhập sai ${LOGIN_MAX_FAILS} lần. Tài khoản tạm khóa ${LOGIN_LOCK_MS / 60_000} phút`);
+      }
+      const left = attemptsLeft(state);
+      throw new HttpError(401, left <= 2 ? `Sai tên đăng nhập hoặc mật khẩu (còn ${left} lần thử)` : "Sai tên đăng nhập hoặc mật khẩu");
     }
+    loginGuard.success(username);
     if (!user.isActive) throw new HttpError(403, "Tài khoản đã bị khóa, vui lòng liên hệ thư viện");
     res.json({ token: signToken(toAuthUser(user)), user: publicUser(user) });
   }),

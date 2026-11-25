@@ -2,6 +2,15 @@
 
 Các phiên bản được phát triển lần lượt theo góp ý trong quá trình làm khóa luận.
 
+## Sau khi nộp báo cáo: rà soát bảo mật và tranh chấp dữ liệu
+
+Mã nguồn ngay trước khi sửa được đánh dấu bằng tag `truoc-sua-loi`. Các sửa đổi dưới đây không đổi CSDL và không thêm chức năng mới.
+
+| Vấn đề | Thay đổi |
+|---|---|
+| Chưa chống dò mật khẩu | Một tài khoản đăng nhập sai 5 lần trong 15 phút thì tạm khóa 15 phút (HTTP 429), báo số lần thử còn lại khi còn ≤ 2 lần. Phần tính toán là hàm thuần trong `auth/loginGuard.ts`, có 4 ca kiểm thử |
+| Đặt phòng có thể trùng khi hai người bấm cùng lúc | Kiểm tra trùng và tạo lượt đặt nằm trong cùng một giao dịch, có khóa `sp_getapplock` theo bạn đọc và theo phòng; người đến sau chờ rồi kiểm tra lại nên chỉ một người đặt được |
+
 ## Phiên bản 2: cập nhật theo góp ý của giảng viên hướng dẫn
 
 | Góp ý | Thay đổi |

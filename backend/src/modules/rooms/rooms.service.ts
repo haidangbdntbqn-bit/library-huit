@@ -1,9 +1,9 @@
-import type { Room, RoomBooking } from "@prisma/client";
+import type { Prisma, Room, RoomBooking } from "@prisma/client";
 import { prisma } from "../../config/prisma";
 import { BOOKING_BLOCKING } from "../../utils/constants";
 import { genCode } from "../../utils/code";
 import { endOfDay, startOfDay } from "../../utils/date";
-import { badRequest, notFound } from "../../utils/http";
+import { badRequest, conflict, notFound } from "../../utils/http";
 import { refreshCardExpiry } from "../cards/cards.routes";
 import { getSettings } from "../settings/settings.service";
 import { ROOM_SHIFTS, matchShift, slotBlockReason } from "../rules/rules";
@@ -19,9 +19,12 @@ export function roomState(room: Room, bookings: RoomBooking[], at = new Date()):
   return "AVAILABLE";
 }
 
+/** Client dùng chung cho truy vấn thường và truy vấn trong giao dịch */
+type Db = Prisma.TransactionClient;
+
 /** Số người đã đặt trùng khung giờ (phòng đọc tính theo chỗ ngồi) */
-async function overlapping(roomId: number, start: Date, end: Date, excludeId?: number) {
-  return prisma.roomBooking.findMany({
+async function overlapping(roomId: number, start: Date, end: Date, excludeId?: number, db: Db = prisma) {
+  return db.roomBooking.findMany({
     where: {
       roomId,
       status: { in: BOOKING_BLOCKING },
@@ -53,12 +56,12 @@ export async function findAvailableRooms(start: Date, end: Date, people: number,
 
 export { ROOM_SHIFTS, matchShift };
 
-export async function validateSlot(room: Room, start: Date, end: Date, people: number, excludeId?: number) {
+export async function validateSlot(room: Room, start: Date, end: Date, people: number, excludeId?: number, db: Db = prisma) {
   if (!matchShift(start, end)) {
     throw badRequest(`Chỉ mượn phòng theo ca: ${ROOM_SHIFTS.map((s) => `${s.start}h–${s.end}h`).join(", ")}`);
   }
   if (end.getTime() <= Date.now()) throw badRequest("Ca này đã kết thúc, vui lòng chọn ca khác");
-  const clash = await overlapping(room.id, start, end, excludeId);
+  const clash = await overlapping(room.id, start, end, excludeId, db);
   const reason = slotBlockReason(room, people, clash);
   if (reason) throw badRequest(reason);
 }
@@ -78,30 +81,53 @@ export async function createBooking(readerId: number, input: BookingInput) {
   if (card?.status !== "ACTIVE") throw badRequest("Bạn cần có thẻ mượn còn hiệu lực để mượn phòng");
   const room = await prisma.room.findUnique({ where: { id: input.roomId } });
   if (!room) throw notFound("Không tìm thấy phòng");
-  await validateSlot(room, input.startTime, input.endTime, input.people);
-  const mine = await prisma.roomBooking.count({
-    where: {
-      readerId,
-      status: { in: BOOKING_BLOCKING },
-      startTime: { lt: input.endTime },
-      endTime: { gt: input.startTime },
-    },
-  });
-  if (mine) throw badRequest("Bạn đã có một lượt đặt phòng khác trùng khung giờ");
   const s = await getSettings();
-  return prisma.roomBooking.create({
-    data: {
-      code: genCode("DP"),
-      readerId,
-      roomId: room.id,
-      startTime: input.startTime,
-      endTime: input.endTime,
-      people: input.people,
-      purpose: input.purpose,
-      status: s.AUTO_APPROVE_BOOKING ? "APPROVED" : "PENDING",
+
+  // Kiểm tra trùng và tạo lượt đặt trong CÙNG một giao dịch, có khóa theo bạn đọc và theo phòng.
+  // Hai người bấm đặt cùng phòng, cùng ca, cùng lúc: người sau phải chờ người trước xong,
+  // rồi mới kiểm tra lại, nên chỉ một người đặt được.
+  return prisma.$transaction(
+    async (tx) => {
+      await acquireLock(tx, `booking-reader-${readerId}`); // khóa theo thứ tự cố định: bạn đọc rồi tới phòng
+      await acquireLock(tx, `booking-room-${room.id}`);
+      await validateSlot(room, input.startTime, input.endTime, input.people, undefined, tx);
+      const mine = await tx.roomBooking.count({
+        where: {
+          readerId,
+          status: { in: BOOKING_BLOCKING },
+          startTime: { lt: input.endTime },
+          endTime: { gt: input.startTime },
+        },
+      });
+      if (mine) throw badRequest("Bạn đã có một lượt đặt phòng khác trùng khung giờ");
+      return tx.roomBooking.create({
+        data: {
+          code: genCode("DP"),
+          readerId,
+          roomId: room.id,
+          startTime: input.startTime,
+          endTime: input.endTime,
+          people: input.people,
+          purpose: input.purpose,
+          status: s.AUTO_APPROVE_BOOKING ? "APPROVED" : "PENDING",
+        },
+        include: { room: true },
+      });
     },
-    include: { room: true },
-  });
+    { timeout: 20000 },
+  );
+}
+
+/**
+ * Khóa ứng dụng của SQL Server (sp_getapplock), tự nhả khi giao dịch kết thúc.
+ * Chờ tối đa 10 giây; quá thời gian thì báo người dùng thử lại.
+ */
+async function acquireLock(tx: Db, resource: string) {
+  const rows = await tx.$queryRaw<Array<{ result: number }>>`
+    DECLARE @result int;
+    EXEC @result = sp_getapplock @Resource = ${resource}, @LockMode = 'Exclusive', @LockOwner = 'Transaction', @LockTimeout = 10000;
+    SELECT @result AS result;`;
+  if (!rows.length || rows[0].result < 0) throw conflict("Hệ thống đang xử lý một lượt đặt khác cho phòng này, vui lòng thử lại");
 }
 
 /** Lịch đặt phòng trong ngày (dùng cho trang tình trạng phòng) */
