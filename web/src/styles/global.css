@@ -421,6 +421,12 @@ a {
   border-color: var(--c-primary);
   color: #fff;
 }
+.shift.mine-pending {
+  background: repeating-linear-gradient(45deg, #eaf1fb, #eaf1fb 6px, #c5d7f2 6px, #c5d7f2 12px);
+  border-color: var(--c-primary);
+  color: var(--c-primary-dark);
+  font-weight: 500;
+}
 .shift.pending {
   background: repeating-linear-gradient(45deg, #e3f3e8, #e3f3e8 6px, #c9e8d4 6px, #c9e8d4 12px);
   border-color: #9fd3b2;

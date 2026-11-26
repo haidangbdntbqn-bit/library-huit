@@ -20,8 +20,10 @@ const DEFAULT_SHIFTS: Shift[] = [
 
 /** Các lượt (chưa hủy) rơi vào một ca */
 function inShift(slots: RoomSlot[], date: Dayjs, s: Shift) {
-  const a = date.hour(s.start).minute(0).second(0);
-  const b = date.hour(s.end).minute(0).second(0);
+  // Phải đặt cả millisecond về 0: ngày chọn mặc định là dayjs() (có mili giây),
+  // nếu không thì lượt 15h–17h bị tính trùng cả ca 13h–15h liền trước
+  const a = date.hour(s.start).minute(0).second(0).millisecond(0);
+  const b = date.hour(s.end).minute(0).second(0).millisecond(0);
   return slots.filter((x) => dayjs(x.startTime).isBefore(b) && dayjs(x.endTime).isAfter(a));
 }
 
@@ -33,13 +35,16 @@ function ShiftGrid({ room, date, shifts, onPick }: { room: Room; date: Dayjs; sh
         const list = inShift(room.schedule ?? [], date, s);
         const ended = date.hour(s.end).minute(0).isBefore(dayjs());
         const mine = list.some((x) => x.mine);
+        const minePending = mine && list.filter((x) => x.mine).every((x) => x.status === "PENDING");
         const used = list.reduce((sum, x) => sum + x.people, 0);
         const reading = room.roomType === "READING";
         const full = reading ? used >= room.capacity : list.length > 0;
         const pendingOnly = !reading && list.length > 0 && list.every((x) => x.status === "PENDING");
-        const cls = mine ? "mine" : ended || room.status === "MAINTENANCE" ? "disabled" : full ? (pendingOnly ? "pending" : "booked") : used ? "partial" : "";
+        const cls = mine ? (minePending ? "mine-pending" : "mine") : ended || room.status === "MAINTENANCE" ? "disabled" : full ? (pendingOnly ? "pending" : "booked") : used ? "partial" : "";
         const text = mine
-          ? "Lượt của bạn"
+          ? minePending
+            ? "Của bạn, chờ duyệt"
+            : "Lượt của bạn"
           : ended
             ? "Đã qua"
             : room.status === "MAINTENANCE"
@@ -160,7 +165,8 @@ export default function Rooms() {
                   <span><i style={{ background: "#fff" }} />Trống, bấm để đặt</span>
                   <span><i style={{ background: "var(--c-booked)", borderColor: "var(--c-booked)" }} />Đã có người đặt</span>
                   <span><i style={{ background: "repeating-linear-gradient(45deg,#e3f3e8,#e3f3e8 3px,#c9e8d4 3px,#c9e8d4 6px)" }} />Đang chờ duyệt</span>
-                  <span><i style={{ background: "var(--c-primary)", borderColor: "var(--c-primary)" }} />Lượt của bạn</span>
+                  <span><i style={{ background: "var(--c-primary)", borderColor: "var(--c-primary)" }} />Lượt của bạn (đã duyệt)</span>
+                  <span><i style={{ background: "repeating-linear-gradient(45deg,#eaf1fb,#eaf1fb 3px,#c5d7f2 3px,#c5d7f2 6px)", borderColor: "var(--c-primary)" }} />Lượt của bạn, chờ duyệt</span>
                   {type === "READING" && <span><i style={{ background: "var(--c-booked-soft)" }} />Còn chỗ</span>}
                 </div>
                 {rooms.data?.length ? (

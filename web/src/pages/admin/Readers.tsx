@@ -1,4 +1,4 @@
-import { App, Button, Col, Descriptions, Drawer, Form, Input, InputNumber, Modal, Row, Select, Space, Table, Tabs } from "antd";
+import { App, Button, Col, Descriptions, Drawer, Form, Input, InputNumber, Modal, Row, Select, Space, Table, Tabs, Tag } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api";
@@ -218,7 +218,15 @@ export default function Readers() {
             title: "Vi phạm chưa xử lý",
             render: (_, r) => (r._count?.violations ? <span style={{ color: "var(--c-danger)" }}>{r._count.violations}</span> : 0),
           },
-          { title: "Tình trạng", render: (_, r) => <StatusTag kind="readerStatus" value={r.status} /> },
+          {
+            title: "Tình trạng",
+            render: (_, r) => (
+              <Space size={4} wrap>
+                <StatusTag kind="readerStatus" value={r.status} />
+                {r.user?.isActive === false && <Tag color="red">Khóa đăng nhập</Tag>}
+              </Space>
+            ),
+          },
         ]}
       />
 
