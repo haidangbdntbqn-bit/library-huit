@@ -386,7 +386,7 @@ class ActionOpeningHours(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         s = get_settings()
         open_h, close_h = s.get("OPEN_HOUR", 7), s.get("CLOSE_HOUR", 20)
-        dispatcher.utter_message(text=f"Thư viện mở cửa từ {open_h}h đến {close_h}h. Phòng học nhóm cũng chỉ đặt được trong khung giờ này.")
+        dispatcher.utter_message(text=f"Thư viện mở cửa từ {open_h}h đến {close_h}h. Phòng đọc, phòng học nhóm mượn theo 4 ca: 7h–9h, 9h–11h, 13h–15h, 15h–17h.")
         return []
 
 

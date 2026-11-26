@@ -1,0 +1,171 @@
+{
+  "bot_challenge": {
+    "precision": 1.0,
+    "recall": 0.75,
+    "f1-score": 0.8571428571428571,
+    "support": 4,
+    "confused_with": {
+      "deny": 1
+    }
+  },
+  "thank": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 4,
+    "confused_with": {}
+  },
+  "goodbye": {
+    "precision": 1.0,
+    "recall": 0.75,
+    "f1-score": 0.8571428571428571,
+    "support": 4,
+    "confused_with": {
+      "deny": 1
+    }
+  },
+  "ask_room": {
+    "precision": 0.8888888888888888,
+    "recall": 1.0,
+    "f1-score": 0.9411764705882353,
+    "support": 8,
+    "confused_with": {}
+  },
+  "deny": {
+    "precision": 0.5,
+    "recall": 0.5,
+    "f1-score": 0.5,
+    "support": 4,
+    "confused_with": {
+      "affirm": 1,
+      "greet": 1
+    }
+  },
+  "ask_buy_material": {
+    "precision": 0.6666666666666666,
+    "recall": 1.0,
+    "f1-score": 0.8,
+    "support": 6,
+    "confused_with": {}
+  },
+  "ask_recommend": {
+    "precision": 0.8333333333333334,
+    "recall": 0.8333333333333334,
+    "f1-score": 0.8333333333333334,
+    "support": 6,
+    "confused_with": {
+      "ask_my_loans": 1
+    }
+  },
+  "ask_book": {
+    "precision": 0.8571428571428571,
+    "recall": 0.6666666666666666,
+    "f1-score": 0.75,
+    "support": 9,
+    "confused_with": {
+      "ask_buy_material": 2,
+      "ask_loan_rules": 1
+    }
+  },
+  "ask_book_by_major": {
+    "precision": 1.0,
+    "recall": 0.8333333333333334,
+    "f1-score": 0.9090909090909091,
+    "support": 6,
+    "confused_with": {
+      "ask_recommend": 1
+    }
+  },
+  "ask_loan_rules": {
+    "precision": 0.8,
+    "recall": 0.8,
+    "f1-score": 0.8000000000000002,
+    "support": 5,
+    "confused_with": {
+      "ask_buy_material": 1
+    }
+  },
+  "ask_my_loans": {
+    "precision": 0.8571428571428571,
+    "recall": 1.0,
+    "f1-score": 0.923076923076923,
+    "support": 6,
+    "confused_with": {}
+  },
+  "ask_opening_hours": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 5,
+    "confused_with": {}
+  },
+  "ask_my_bookings": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 4,
+    "confused_with": {}
+  },
+  "ask_renew": {
+    "precision": 1.0,
+    "recall": 0.8,
+    "f1-score": 0.888888888888889,
+    "support": 5,
+    "confused_with": {
+      "ask_fine": 1
+    }
+  },
+  "affirm": {
+    "precision": 0.75,
+    "recall": 0.75,
+    "f1-score": 0.75,
+    "support": 4,
+    "confused_with": {
+      "greet": 1
+    }
+  },
+  "greet": {
+    "precision": 0.6666666666666666,
+    "recall": 1.0,
+    "f1-score": 0.8,
+    "support": 4,
+    "confused_with": {}
+  },
+  "ask_fine": {
+    "precision": 0.8,
+    "recall": 0.8,
+    "f1-score": 0.8000000000000002,
+    "support": 5,
+    "confused_with": {
+      "ask_room": 1
+    }
+  },
+  "ask_card": {
+    "precision": 1.0,
+    "recall": 0.8,
+    "f1-score": 0.888888888888889,
+    "support": 5,
+    "confused_with": {
+      "ask_book": 1
+    }
+  },
+  "accuracy": 0.851063829787234,
+  "macro avg": {
+    "precision": 0.8677689594356262,
+    "recall": 0.8490740740740742,
+    "f1-score": 0.8499300626751608,
+    "support": 94
+  },
+  "weighted avg": {
+    "precision": 0.8684566024991557,
+    "recall": 0.851063829787234,
+    "f1-score": 0.851260111741964,
+    "support": 94
+  },
+  "micro avg": {
+    "precision": 0.851063829787234,
+    "recall": 0.851063829787234,
+    "f1-score": 0.851063829787234,
+    "support": 94
+  }
+}

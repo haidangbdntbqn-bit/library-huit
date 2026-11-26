@@ -1,0 +1,114 @@
+[
+  {
+    "text": "thôi mình out nha",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.3545706868171692
+    }
+  },
+  {
+    "text": "chuan roi do",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.9564278721809387
+    }
+  },
+  {
+    "text": "k can dau ad",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.6467535495758057
+    }
+  },
+  {
+    "text": "sai rồi",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.9345002770423889
+    }
+  },
+  {
+    "text": "bạn có phải chatbot không",
+    "intent": "bot_challenge",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.45964986085891724
+    }
+  },
+  {
+    "text": "thư viện có cuốn mạng máy tính không ạ",
+    "intent": "ask_book",
+    "intent_prediction": {
+      "name": "ask_buy_material",
+      "confidence": 0.829190194606781
+    }
+  },
+  {
+    "text": "cho em mượn kinh tế vi mô",
+    "intent": "ask_book",
+    "intent_prediction": {
+      "name": "ask_buy_material",
+      "confidence": 0.7541523575782776
+    }
+  },
+  {
+    "text": "con cuon he dieu hanh ko",
+    "intent": "ask_book",
+    "intent_prediction": {
+      "name": "ask_loan_rules",
+      "confidence": 0.367722749710083
+    }
+  },
+  {
+    "text": "ngành marketing có sách gì",
+    "intent": "ask_book_by_major",
+    "intent_prediction": {
+      "name": "ask_recommend",
+      "confidence": 0.9555546641349792
+    }
+  },
+  {
+    "text": "giáo trình có được mang ra ngoài không",
+    "intent": "ask_loan_rules",
+    "intent_prediction": {
+      "name": "ask_buy_material",
+      "confidence": 0.6377952098846436
+    }
+  },
+  {
+    "text": "sách sắp hết hạn thì kéo dài thêm sao",
+    "intent": "ask_renew",
+    "intent_prediction": {
+      "name": "ask_fine",
+      "confidence": 0.5236662030220032
+    }
+  },
+  {
+    "text": "tra tre 3 ngay bi phat bao nhieu",
+    "intent": "ask_fine",
+    "intent_prediction": {
+      "name": "ask_room",
+      "confidence": 0.6821430325508118
+    }
+  },
+  {
+    "text": "thẻ sinh viên có dùng để mượn sách được không",
+    "intent": "ask_card",
+    "intent_prediction": {
+      "name": "ask_book",
+      "confidence": 0.5998565554618835
+    }
+  },
+  {
+    "text": "sách nào đang được mượn nhiều",
+    "intent": "ask_recommend",
+    "intent_prediction": {
+      "name": "ask_my_loans",
+      "confidence": 0.9712178707122803
+    }
+  }
+]

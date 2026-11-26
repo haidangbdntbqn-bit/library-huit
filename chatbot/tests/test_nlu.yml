@@ -1,0 +1,155 @@
+version: "3.1"
+
+# Tập kiểm tra độc lập cho NLU (KLCN049).
+# Các câu dưới đây KHÔNG có trong data/nlu.yml và không dùng để huấn luyện.
+# Viết theo cách sinh viên thường gõ: có dấu, không dấu, viết tắt, sai chính tả, câu dài.
+# Chạy:  rasa test nlu --nlu tests/test_nlu.yml --out results/independent
+
+nlu:
+  - intent: greet
+    examples: |
+      - chào buổi sáng
+      - hello thư viện ơi
+      - ad ơi cho em hỏi
+      - chao buoi toi
+
+  - intent: goodbye
+    examples: |
+      - thôi mình out nha
+      - chào nhé hẹn hôm khác
+      - bye bye
+      - di hoc day bye
+
+  - intent: thank
+    examples: |
+      - cảm ơn ad nhiều
+      - thank you nha
+      - ok tks ad
+      - cam on nhe
+
+  - intent: affirm
+    examples: |
+      - đúng vậy
+      - ừ đúng rồi
+      - oke
+      - chuan roi do
+
+  - intent: deny
+    examples: |
+      - không phải ý mình
+      - ko cần đâu
+      - k can dau ad
+      - sai rồi
+
+  - intent: bot_challenge
+    examples: |
+      - đây là người thật trả lời hả
+      - bạn có phải chatbot không
+      - ai đang trả lời tin nhắn vậy
+      - ban co phai nguoi that khong
+
+  - intent: ask_book
+    examples: |
+      - thư viện có cuốn [mạng máy tính](book_title) không ạ
+      - cho em mượn [kinh tế vi mô](book_title)
+      - em cần tìm quyển [toán cao cấp](book_title)
+      - [hệ điều hành](book_title) còn bản nào không
+      - có [lập trình java](book_title) không ad
+      - tim giup minh sach [mang may tinh](book_title)
+      - con cuon [he dieu hanh](book_title) ko
+      - sách [an toàn thông tin](book_title) nằm ở kệ mấy
+      - ktra giúp em sách [kinh te vi mo](book_title) còn k
+
+  - intent: ask_book_by_major
+    examples: |
+      - ngành [marketing](major) có sách gì
+      - em học [tài chính ngân hàng](major) thì thư viện có giáo trình nào
+      - danh sách sách của khoa [công nghệ thông tin](major)
+      - sinh viên [kế toán](major) mượn được những sách nào
+      - nganh [quan tri kinh doanh](major) co tai lieu gi
+      - sach danh cho [cntt](major)
+
+  - intent: ask_room
+    examples: |
+      - nhóm em [7](people) người muốn đặt phòng [sáng](time_of_day) [thứ 6](day)
+      - phòng học nhóm [chiều mai](time_of_day) còn trống không
+      - cho mình book phòng [ca 2](time_of_day)
+      - có phòng nào cho [10](people) người không
+      - muốn mượn phòng đọc [thứ 4](day)
+      - dat phong nhom [chieu nay](time_of_day) cho [5](people) nguoi
+      - con phong trong [thu 3](day) khong ad
+      - phòng nhóm hôm nay full chưa
+
+  - intent: ask_my_loans
+    examples: |
+      - mình đang giữ mấy cuốn sách của thư viện
+      - em mượn sách khi nào phải trả vậy
+      - sách em mượn hôm trước hạn tới ngày nào
+      - check giúp mình sách đang mượn
+      - toi co dang no sach nao khong
+      - han tra cua minh la ngay nao
+
+  - intent: ask_my_bookings
+    examples: |
+      - lượt đặt phòng của mình đã được xác nhận chưa
+      - mình có lịch phòng nào tuần này không
+      - xem phòng mình đã book
+      - lich dat phong cua toi
+
+  - intent: ask_loan_rules
+    examples: |
+      - một lần mượn được mấy quyển
+      - mượn sách về nhà tối đa mấy ngày vậy
+      - giáo trình có được mang ra ngoài không
+      - quy dinh muon sach cua thu vien la gi
+      - sinh vien duoc muon bao nhieu cuon
+
+  - intent: ask_renew
+    examples: |
+      - em muốn gia hạn thêm vài ngày được không
+      - sách sắp hết hạn thì kéo dài thêm sao
+      - gia hạn trên app được không
+      - gia han them duoc may ngay
+      - xin gia han sach
+
+  - intent: ask_fine
+    examples: |
+      - trễ hạn một tuần thì đóng bao nhiêu tiền
+      - lỡ làm ướt sách thì có bị phạt không
+      - mất sách phải đền bao nhiêu
+      - tra tre 3 ngay bi phat bao nhieu
+      - mat sach thi den nhu the nao
+
+  - intent: ask_opening_hours
+    examples: |
+      - chủ nhật thư viện có mở không
+      - mấy giờ thư viện mở cửa buổi sáng
+      - thư viện làm việc tới mấy giờ tối
+      - thu vien mo may gio vay
+      - gio dong cua thu vien
+
+  - intent: ask_card
+    examples: |
+      - em là tân sinh viên làm thẻ thư viện ở đâu
+      - thẻ sinh viên có dùng để mượn sách được không
+      - đăng ký thẻ thư viện cần giấy tờ gì
+      - lam the muon sach o dau
+      - the thu vien cua minh het han roi
+
+  - intent: ask_buy_material
+    examples: |
+      - nhà sách có bán giáo trình [kinh tế vi mô](book_title) không
+      - mua bài giảng [mạng máy tính](book_title) ở đâu
+      - giá giáo trình [toán cao cấp](book_title) là bao nhiêu
+      - muốn mua tài liệu học phần thì thanh toán sao
+      - mua giao trinh [lap trinh java](book_title) bao nhieu tien
+      - tai lieu bai giang ban o dau
+
+  - intent: ask_recommend
+    examples: |
+      - giới thiệu cho mình vài cuốn sách đáng đọc
+      - sách nào đang được mượn nhiều
+      - học [machine learning](book_title) nên bắt đầu bằng sách nào
+      - gợi ý giúp em sách cho sinh viên năm hai
+      - goi y vai cuon sach ve [kinh doanh](book_title)
+      - co sach nao hay de doc khong
